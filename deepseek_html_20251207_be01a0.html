@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أسيل | مصممة جرافيكية إبداعية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- تأثير الجزيئات المتحركة -->
+    <div id="particles-js"></div>
+    
+    <!-- شريط التنقل الاحترافي -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- الشعار -->
+            <a href="#" class="navbar-logo">
+                <i class="fas fa-palette"></i>
+                <span class="logo-text" data-key="logo">أسيل</span>
+            </a>
+            
+            <!-- قائمة التنقل -->
+            <ul class="navbar-menu" id="navbarMenu">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active" data-page="home" data-key="navHome">
+                        <i class="fas fa-home"></i>
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-page="profile" data-key="navProfile">
+                        <i class="fas fa-user"></i>
+                        <span>الملف الشخصي</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-page="education" data-key="navEducation">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>التعليم والشهادات</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-page="projects" data-key="navProjects">
+                        <i class="fas fa-briefcase"></i>
+                        <span>المشاريع</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-page="skills" data-key="navSkills">
+                        <i class="fas fa-tools"></i>
+                        <span>المهارات</span>
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" data-page="contact" data-key="navContact">
+                        <i class="fas fa-envelope"></i>
+                        <span>اتصل بي</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- عناصر الجانب الأيمن -->
+            <div class="navbar-right">
+                <!-- زر اللغة -->
+                <div class="language-switcher">
+                    <button class="language-btn" id="languageBtn">
+                        <span class="language-text" data-key="language">EN</span>
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <button class="language-option active" data-lang="ar">
+                            <i class="fas fa-check"></i>
+                            <span>العربية</span>
+                        </button>
+                        <button class="language-option" data-lang="en">
+                            <i class="fas fa-check"></i>
+                            <span>English</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- زر القائمة للموبايل -->
+                <button class="navbar-toggle" id="navbarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- زر الرجوع للصفحة الرئيسية -->
+    <button class="back-home-btn" id="backHomeBtn">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+    </button>
+    
+    <!-- الصفحة الرئيسية -->
+    <div class="page active" id="home">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title" data-key="heroTitle">مرحباً، أنا أسيل<br>مصممة جرافيكية إبداعية</h1>
+                <p class="hero-description" data-key="heroDescription">أقوم بتحويل الأفكار إلى تصاميم بصرية مذهلة باستخدام أحدث أدوات التصميم وأفضل ممارسات الصناعة. لدي شغف بإنشاء هويات بصرية وتصاميم جرافيكية مع تركيز كبير على التفاصيل والجودة والإبداع.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary" data-page="projects" data-key="viewProjects">
+                        <i class="fas fa-eye"></i> عرض مشاريعي
+                    </a>
+                    <a href="#" class="btn btn-secondary" data-page="contact" data-key="contactMe">
+                        <i class="fas fa-paper-plane"></i> تواصل معي
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-shape">
+                    <i class="fas fa-magic"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ملخص الأقسام -->
+        <div class="sections-summary">
+            <h2 class="sections-title" data-key="sectionsTitle">استكشف عالمي الإبداعي</h2>
+            <div class="summary-grid">
+                <div class="summary-card" data-page="profile">
+                    <div class="summary-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 data-key="summaryProfileTitle">الملف الشخصي</h3>
+                    <p data-key="summaryProfileDesc">تعرف على مسيرتي المهنية وخبراتي في مجال التصميم الجرافيكي والإبداع البصري. اكتشف شغفي وتخصصاتي الفنية.</p>
+                    <a href="#" class="btn btn-outline" data-page="profile" data-key="viewProfile">عرض الملف</a>
+                </div>
+                
+                <div class="summary-card" data-page="education">
+                    <div class="summary-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 data-key="summaryEducationTitle">التعليم والشهادات</h3>
+                    <p data-key="summaryEducationDesc">تعرف على مؤهلاتي الأكاديمية والشهادات المهنية التي حصلت عليها في مجال التصميم والجرافيك.</p>
+                    <a href="#" class="btn btn-outline" data-page="education" data-key="viewEducation">عرض التعليم</a>
+                </div>
+                
+                <div class="summary-card" data-page="projects">
+                    <div class="summary-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 data-key="summaryProjectsTitle">المشاريع</h3>
+                    <p data-key="summaryProjectsDesc">تصفح معرض أعمالي المتنوعة في التصميم الجرافيكي، الهويات البصرية، والمواد الإعلانية الإبداعية.</p>
+                    <a href="#" class="btn btn-outline" data-page="projects" data-key="viewProjects2">عرض المشاريع</a>
+                </div>
+                
+                <div class="summary-card" data-page="skills">
+                    <div class="summary-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 data-key="summarySkillsTitle">المهارات</h3>
+                    <p data-key="summarySkillsDesc">اكتشف مهاراتي التقنية والإبداعية المتقدمة في مختلف برامج وتقنيات التصميم الحديثة والمتطورة.</p>
+                    <a href="#" class="btn btn-outline" data-page="skills" data-key="viewSkills">عرض المهارات</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة الملف الشخصي -->
+    <div class="page" id="profile">
+        <div class="page-header">
+            <h1 class="page-title" data-key="profileTitle">الملف الشخصي</h1>
+            <p class="page-description" data-key="profileDescription">مصممة جرافيكية محترفة مع سنوات من الخبرة في إنشاء هويات بصرية متميزة وتصاميم إبداعية مبتكرة.</p>
+        </div>
+        
+        <div class="profile-header">
+            <div class="profile-image">
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <div class="profile-info">
+                <h1 data-key="profileName">أسيل</h1>
+                <div class="title" data-key="profileTitle2">مصممة جرافيكية ومطورة هويات بصرية</div>
+                <p data-key="profileFullDescription">أنا مصممة جرافيكية محترفة مع سنوات من الخبرة في إنشاء هويات بصرية متميزة وتصاميم إبداعية مبتكرة. أعمل على تحويل الأفكار المجردة إلى واقع بصري جذاب عبر استخدام أحدث أدوات التصميم والبرمجيات الاحترافية. لدي شغف عميق بخلق تجارب بصرية مميزة تلهم الجمهور وتحقق أهداف العلامات التجارية بشكل فعال.</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-award"></i> <span data-key="experienceTitle">الخبرة المهنية</span></h2>
+            <p data-key="experienceDescription">عملت على مجموعة متنوعة من المشاريع الإبداعية التي ساهمت في تطوير مهاراتي ومعرفتي في مجال التصميم:</p>
+            <ul class="experience-list">
+                <li data-key="experienceItem1">
+                    <i class="fas fa-check-circle"></i>
+                    تصميم هويات بصرية متكاملة للعديد من الشركات المحلية والدولية بمختلف القطاعات
+                </li>
+                <li data-key="experienceItem2">
+                    <i class="fas fa-check-circle"></i>
+                    إنشاء مواد تسويقية وإعلانية مبتكرة للعديد من الحملات الترويجية الناجحة
+                </li>
+                <li data-key="experienceItem3">
+                    <i class="fas fa-check-circle"></i>
+                    تصميم واجهات مستخدم وتجارب بصرية متقدمة لتطبيقات ومواقع إلكترونية
+                </li>
+                <li data-key="experienceItem4">
+                    <i class="fas fa-check-circle"></i>
+                    تطوير أنظمة تصميم متكاملة لتحسين تجربة العلامات التجارية وزيادة فعاليتها
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- صفحة التعليم والشهادات -->
+    <div class="page" id="education">
+        <div class="page-header">
+            <h1 class="page-title" data-key="educationTitle">التعليم والشهادات</h1>
+            <p class="page-description" data-key="educationDescription">مؤهلاتي الأكاديمية والشهادات المهنية التي حصلت عليها في مجال التصميم الجرافيكي والتقنيات المرتبطة به.</p>
+        </div>
+        
+        <div class="education-container">
+            <!-- التعليم الأكاديمي -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-university"></i> <span data-key="academicEducation">التعليم الأكاديمي</span></h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2024</div>
+                        <div class="timeline-content">
+                            <h3 data-key="degree1Title">بكالوريوس في التصميم الجرافيكي والوسائط المتعددة</h3>
+                            <p class="institution" data-key="degree1Institution">جامعة الملك سعود - الرياض</p>
+                            <p data-key="degree1Description">تخصصت في تصميم الهويات البصرية وتجربة المستخدم، مع تركيز على الجوانب الإبداعية والتقنية في التصميم الرقمي والمطبوع.</p>
+                            <div class="gpa" data-key="degree1GPA">المعدل التراكمي: 4.75 / 5.0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2018 - 2020</div>
+                        <div class="timeline-content">
+                            <h3 data-key="degree2Title">دبلوم في الفنون والتصميم</h3>
+                            <p class="institution" data-key="degree2Institution">كلية التصميم والفنون - جدة</p>
+                            <p data-key="degree2Description">دراسة متخصصة في أساسيات التصميم الجرافيكي، نظرية الألوان، التصميم الطباعي، وتقنيات الرسم الرقمي.</p>
+                            <div class="gpa" data-key="degree2GPA">التقدير: ممتاز</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الشهادات المهنية -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-certificate"></i> <span data-key="professionalCertifications">الشهادات المهنية</span></h2>
+                
+                <div class="certifications-grid">
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fab fa-adobe"></i>
+                        </div>
+                        <div class="certification-info">
+                            <h3 data-key="cert1Title">Adobe Certified Professional</h3>
+                            <p class="issuer" data-key="cert1Issuer">Adobe Systems</p>
+                            <p data-key="cert1Description">شهادة مهنية معتمدة في استخدام Adobe Creative Suite (Photoshop, Illustrator, InDesign)</p>
+                            <div class="cert-date" data-key="cert1Date">تم الحصول عليها: 2023</div>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="certification-info">
+                            <h3 data-key="cert2Title">UI/UX Design Specialization</h3>
+                            <p class="issuer" data-key="cert2Issuer">Google & Coursera</p>
+                            <p data-key="cert2Description">تخصص في تصميم واجهات المستخدم وتجربة المستخدم، يتضمن أساسيات البحث، التصميم، والاختبار</p>
+                            <div class="cert-date" data-key="cert2Date">تم الحصول عليها: 2022</div>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="certification-info">
+                            <h3 data-key="cert3Title">Mobile App Design Certificate</h3>
+                            <p class="issuer" data-key="cert3Issuer">Interaction Design Foundation</p>
+                            <p data-key="cert3Description">شهادة في تصميم تطبيقات الجوال، تشمل مبادئ تصميم واجهات الهواتف الذكية والأجهزة اللوحية</p>
+                            <div class="cert-date" data-key="cert3Date">تم الحصول عليها: 2022</div>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="certification-info">
+                            <h3 data-key="cert4Title">Motion Graphics Certification</h3>
+                            <p class="issuer" data-key="cert4Issuer">School of Motion</p>
+                            <p data-key="cert4Description">تدريب متقدم في الرسوم المتحركة والمؤثرات البصرية باستخدام Adobe After Effects وCinema 4D</p>
+                            <div class="cert-date" data-key="cert4Date">تم الحصول عليها: 2021</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الدورات التدريبية -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-book-open"></i> <span data-key="trainingCourses">الدورات التدريبية</span></h2>
+                
+                <div class="courses-list">
+                    <div class="course-item">
+                        <h3 data-key="course1Title">تصميم الهويات البصرية المتكاملة</h3>
+                        <p class="course-platform" data-key="course1Platform">Udemy - 2023</p>
+                    </div>
+                    
+                    <div class="course-item">
+                        <h3 data-key="course2Title">التصميم الطباعي المتقدم</h3>
+                        <p class="course-platform" data-key="course2Platform">Skillshare - 2023</p>
+                    </div>
+                    
+                    <div class="course-item">
+                        <h3 data-key="course3Title">أساسيات التسويق الرقمي للتصميم</h3>
+                        <p class="course-platform" data-key="course3Platform">LinkedIn Learning - 2022</p>
+                    </div>
+                    
+                    <div class="course-item">
+                        <h3 data-key="course4Title">تصميم الويب باستخدام Figma</h3>
+                        <p class="course-platform" data-key="course4Platform">YouTube Premium - 2022</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة المشاريع -->
+    <div class="page" id="projects">
+        <div class="page-header">
+            <h1 class="page-title" data-key="projectsTitle">مشاريعي الإبداعية</h1>
+            <p class="page-description" data-key="projectsDescription">إليك مجموعة مختارة من أبرز المشاريع التصميمية التي قمت بتنفيذها مؤخراً، والتي تعكس تنوع مهاراتي وإبداعي في مجالات التصميم المختلفة.</p>
+        </div>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="project-info">
+                    <h3 data-key="project1Title">هوية بصرية متكاملة</h3>
+                    <p data-key="project1Description">تصميم هوية بصرية كاملة تشمل الشعار، نظام الألوان، الخطوط، والمواد الترويجية لشركة ناشئة في مجال التكنولوجيا.</p>
+                    <div class="project-tags">
+                        <span class="tag">تصميم الشعارات</span>
+                        <span class="tag">الهوية البصرية</span>
+                        <span class="tag">Adobe Suite</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="project-info">
+                    <h3 data-key="project2Title">مواد تسويقية مطبوعة</h3>
+                    <p data-key="project2Description">تصميم مجموعة متكاملة من المواد المطبوعة لحملة تسويقية واسعة النطاق تشمل بروشورات، فلayers، ومواد عرض.</p>
+                    <div class="project-tags">
+                        <span class="tag">تصميم مطبوع</span>
+                        <span class="tag">تسويق</span>
+                        <span class="tag">Illustrator</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="project-info">
+                    <h3 data-key="project3Title">واجهة تطبيق جوال</h3>
+                    <p data-key="project3Description">تصميم واجهة مستخدم وتجربة مستخدم متكاملة لتطبيق جوال مبتكر في قطاع التكنولوجيا المالية والخدمات المصرفية.</p>
+                    <div class="project-tags">
+                        <span class="tag">UI/UX</span>
+                        <span class="tag">تطبيقات الجوال</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="project-info">
+                    <h3 data-key="project4Title">تصميم موقع إلكتروني</h3>
+                    <p data-key="project4Description">تصميم واجهة موقع إلكتروني متكامل مع التركيز على تجربة المستخدم، الجاذبية البصرية، والاستجابة للأجهزة المختلفة.</p>
+                    <div class="project-tags">
+                        <span class="tag">تصميم الويب</span>
+                        <span class="tag">استجابة</span>
+                        <span class="tag">Adobe XD</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="project-info">
+                    <h3 data-key="project5Title">مواد بصرية للوسائط المتعددة</h3>
+                    <p data-key="project5Description">إنشاء محتوى بصري متكامل وفيديوهات رسومية متحركة لحملة إعلانية رقمية واسعة على منصات التواصل الاجتماعي.</p>
+                    <div class="project-tags">
+                        <span class="tag">الرسوم المتحركة</span>
+                        <span class="tag">مونتاج الفيديو</span>
+                        <span class="tag">After Effects</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="project-info">
+                    <h3 data-key="project6Title">تصميم كتاب إلكتروني</h3>
+                    <p data-key="project6Description">تصميم وتخطيط كتاب إلكتروني تفاعلي مع رسوم توضيحية مخصصة وأسلوب بصري جذاب لدار نشر رائدة.</p>
+                    <div class="project-tags">
+                        <span class="tag">تخطيط الصفحات</span>
+                        <span class="tag">الرسم التوضيحي</span>
+                        <span class="tag">InDesign</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة المهارات -->
+    <div class="page" id="skills">
+        <div class="page-header">
+            <h1 class="page-title" data-key="skillsTitle">مهاراتي المتقدمة</h1>
+            <p class="page-description" data-key="skillsDescription">مجموعة المهارات التقنية والإبداعية المتطورة التي أتمتع بها في مجال التصميم الجرافيكي والوسائط الرقمية، مع تركيز على الابتكار والتطوير المستمر.</p>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skill-category">
+                <h2 class="card-title"><i class="fas fa-paint-brush"></i> <span data-key="designSkills">مهارات التصميم الأساسية</span></h2>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillAdobe">Adobe Creative Suite</span>
+                        <span class="skill-percent">96%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="96"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillUIUX">تصميم UI/UX</span>
+                        <span class="skill-percent">92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="92"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillLogo">تصميم الشعارات والهويات</span>
+                        <span class="skill-percent">94%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="94"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillTypography">التخطيط الطباعي والأنماط</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h2 class="card-title"><i class="fas fa-tools"></i> <span data-key="technicalSkills">المهارات التقنية المتقدمة</span></h2>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillFigma">Figma & Sketch</span>
+                        <span class="skill-percent">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="88"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillMotion">الرسوم المتحركة والمؤثرات</span>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillPrint">التصميم للطباعة والإنتاج</span>
+                        <span class="skill-percent">93%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="93"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillWeb">تصميم الويب والاستجابة</span>
+                        <span class="skill-percent">89%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="89"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h2 class="card-title"><i class="fas fa-lightbulb"></i> <span data-key="creativeSkills">المهارات الإبداعية والقيادية</span></h2>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillConcept">تطوير المفاهيم والإبداع</span>
+                        <span class="skill-percent">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="95"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillBranding">الهوية البصرية والتسويق</span>
+                        <span class="skill-percent">91%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="91"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillColor">نظرية الألوان والتنسيق</span>
+                        <span class="skill-percent">94%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="94"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name" data-key="skillIllustration">الرسم التوضيحي والفني</span>
+                        <span class="skill-percent">87%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="87"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة الاتصال -->
+    <div class="page" id="contact">
+        <div class="page-header">
+            <h1 class="page-title" data-key="contactTitle">تواصل معي</h1>
+            <p class="page-description" data-key="contactDescription">أهلاً بك! لا تتردد في التواصل معي لمناقشة مشروعك التصميمي القادم، أو لأي استفسارات أخرى. سأكون سعيدة بمساعدتك وتحويل أفكارك إلى واقع إبداعي مميز.</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3 data-key="contactAddressTitle">العنوان</h3>
+                        <p data-key="contactAddress">الرياض، المملكة العربية السعودية</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3 data-key="contactPhoneTitle">الهاتف</h3>
+                        <p>+966 55 *** ****</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3 data-key="contactEmailTitle">البريد الإلكتروني</h3>
+                        <p>aseel@*******.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3 data-key="contactHoursTitle">ساعات العمل</h3>
+                        <p data-key="contactHours">الأحد - الخميس: 9 صباحاً - 6 مساءً</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-key="formName">الاسم الكامل *</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" data-key="formEmail">البريد الإلكتروني *</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject" data-key="formSubject">الموضوع *</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" data-key="formMessage">الرسالة *</label>
+                        <textarea id="message" class="form-control" required placeholder="أهلاً أسيل، أرغب في مناقشة مشروع تصميمي معك..." data-key="formMessagePlaceholder"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" data-key="formSubmit">
+                        <i class="fas fa-paper-plane"></i> إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- التذييل الاحترافي -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-palette"></i>
+                    <span>أسيل</span>
+                </div>
+                <div class="footer-info">
+                    <p class="copyright">© 2025 Aseel. جميع الحقوق محفوظة.</p>
+                    <p class="footer-text">مصممة جرافيكية إبداعية متخصصة في الهويات البصرية وتجربة المستخدم.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
