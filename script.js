@@ -1,4 +1,4 @@
-// Initialize AOS (Animate On Scroll)
+// Initialize AOS
 AOS.init({
     duration: 1000,
     once: true,
@@ -8,16 +8,12 @@ AOS.init({
 // DOM Elements
 const loader = document.querySelector('.loader');
 const header = document.querySelector('.header');
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav');
-const navLinks = document.querySelectorAll('.nav-link');
 const backToTop = document.querySelector('.back-to-top');
-const filterBtns = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-item');
-const viewBtns = document.querySelectorAll('.view-btn');
+const viewProjectBtns = document.querySelectorAll('.view-project');
 const projectModal = document.querySelector('.project-modal');
 const modalClose = document.querySelector('.modal-close');
-const contactForm = document.querySelector('.contact-form');
+const contactForm = document.getElementById('contactForm');
 const statNumbers = document.querySelectorAll('.stat-number');
 
 // Page Loader
@@ -35,7 +31,6 @@ window.addEventListener('load', () => {
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     
-    // Header background effect
     if (scrollY > 100) {
         header.style.backgroundColor = 'rgba(242, 241, 238, 0.98)';
         header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
@@ -51,15 +46,21 @@ window.addEventListener('scroll', () => {
         backToTop.classList.remove('show');
     }
     
-    // Active navigation link
+    // Update active nav link
+    updateActiveNavLink();
+});
+
+// Update Active Nav Link
+function updateActiveNavLink() {
     const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
     let current = '';
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
         const sectionHeight = section.clientHeight;
         
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
             current = section.getAttribute('id');
         }
     });
@@ -70,28 +71,7 @@ window.addEventListener('scroll', () => {
             link.classList.add('active');
         }
     });
-});
-
-// Mobile Menu Toggle
-menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-    
-    if (nav.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-});
+}
 
 // Back to Top
 backToTop.addEventListener('click', () => {
@@ -101,85 +81,53 @@ backToTop.addEventListener('click', () => {
     });
 });
 
-// Portfolio Filtering
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        
-        // Add active class to clicked button
-        btn.classList.add('active');
-        
-        const filterValue = btn.getAttribute('data-filter');
-        
-        // Filter portfolio items
-        portfolioItems.forEach(item => {
-            const category = item.getAttribute('data-category');
-            
-            if (filterValue === 'all' || filterValue === category) {
-                item.style.display = 'block';
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 100);
-            } else {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    item.style.display = 'none';
-                }, 300);
-            }
-        });
+// Portfolio Item Hover Effect
+portfolioItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        item.style.transform = 'translateY(-10px)';
+        item.style.transition = 'transform 0.3s ease';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        item.style.transform = 'translateY(0)';
     });
 });
 
 // View Project Modal
-viewBtns.forEach(btn => {
+viewProjectBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         
-        const portfolioItem = btn.closest('.portfolio-item');
-        const projectTitle = portfolioItem.querySelector('h3').textContent;
-        const projectCategory = portfolioItem.querySelector('p').textContent;
-        const projectImage = portfolioItem.querySelector('img').src;
+        const projectItem = btn.closest('.portfolio-item');
+        const projectTitle = projectItem.querySelector('h3').textContent;
+        const projectCategory = projectItem.querySelector('p').textContent;
+        const projectImage = projectItem.querySelector('img').src;
         
         // Set modal content
         const modalBody = projectModal.querySelector('.modal-body');
         modalBody.innerHTML = `
-            <div class="project-modal-content">
+            <div class="modal-project">
                 <div class="modal-header">
                     <h2>${projectTitle}</h2>
-                    <p class="modal-category">${projectCategory}</p>
+                    <p>${projectCategory}</p>
                 </div>
                 
                 <div class="modal-image">
-                    <img src="${projectImage}" alt="${projectTitle}">
+                    <img src="${projectImage}" alt="${projectTitle}" style="width:100%; height:300px; object-fit:cover; margin:2rem 0;">
                 </div>
                 
                 <div class="modal-details">
                     <div class="modal-section">
                         <h3>عن المشروع</h3>
-                        <p>هذا المشروع يمثل رؤية فنية حديثة للجماليات الكلاسيكية، حيث تم دمج عناصر الفن الإغريقي القديم مع تقنيات التصميم الحديثة لخلق تجربة بصرية فريدة. العمل يعكس التزامي بالدقة والتفاصيل التي تميز الفن الكلاسيكي.</p>
+                        <p>هذا المشروع يمثل رؤية فنية حديثة للجماليات الكلاسيكية، حيث تم دمج عناصر الفن الإغريقي القديم مع تقنيات التصميم الحديثة لخلق تجربة بصرية فريدة.</p>
                     </div>
                     
                     <div class="modal-section">
-                        <h3>التحديات</h3>
-                        <p>تحويل المفهوم الكلاسيكي إلى تصميم حديث مع الحفاظ على الجوهر الفني الأصيل، وضمان أن يكون التصميم عمليًا وجذابًا في نفس الوقت.</p>
-                    </div>
-                    
-                    <div class="modal-section">
-                        <h3>الحلول</h3>
-                        <p>استخدام تقنيات التصميم المتقدمة مع الحفاظ على بساطة وأصالة الفن الكلاسيكي، واختيار الألوان والخطوط المناسبة التي تعكس الفخامة والحداثة في آن واحد.</p>
-                    </div>
-                    
-                    <div class="modal-section">
-                        <h3>الأدوات والتقنيات</h3>
+                        <h3>الأدوات</h3>
                         <div class="modal-tools">
                             <span>Adobe Illustrator</span>
-                            <span>Adobe Photoshop</span>
+                            <span>Photoshop</span>
                             <span>Figma</span>
-                            <span>Procreate</span>
-                            <span>After Effects</span>
                         </div>
                     </div>
                     
@@ -189,12 +137,10 @@ viewBtns.forEach(btn => {
                     </div>
                 </div>
                 
-                <div class="modal-actions">
-                    <button class="btn-primary" id="close-modal">
-                        <span>إغلاق</span>
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+                <button class="btn-primary" id="closeModal" style="margin-top:2rem; width:100%;">
+                    <span>إغلاق</span>
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         `;
         
@@ -203,7 +149,7 @@ viewBtns.forEach(btn => {
         document.body.style.overflow = 'hidden';
         
         // Add event listener to close button in modal
-        const closeModalBtn = document.getElementById('close-modal');
+        const closeModalBtn = document.getElementById('closeModal');
         if (closeModalBtn) {
             closeModalBtn.addEventListener('click', () => {
                 projectModal.classList.remove('active');
@@ -232,21 +178,20 @@ if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const service = document.getElementById('service').value;
-        const message = document.getElementById('message').value;
+        const name = contactForm.querySelector('input[type="text"]').value;
+        const email = contactForm.querySelector('input[type="email"]').value;
+        const message = contactForm.querySelector('textarea').value;
         
         // Basic validation
-        if (!name || !email || !service || !message) {
-            showNotification('يرجى ملء جميع الحقول', 'error');
+        if (!name || !email || !message) {
+            alert('يرجى ملء جميع الحقول');
             return;
         }
         
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            showNotification('يرجى إدخال بريد إلكتروني صحيح', 'error');
+            alert('يرجى إدخال بريد إلكتروني صحيح');
             return;
         }
         
@@ -258,7 +203,7 @@ if (contactForm) {
         
         // Simulate API call
         setTimeout(() => {
-            showNotification(`شكراً ${name}! تم استلام رسالتك بنجاح. سأتواصل معك قريباً.`, 'success');
+            alert(`شكراً ${name}! تم استلام رسالتك بنجاح. سأتصل بك قريباً.`);
             
             // Reset form
             contactForm.reset();
@@ -274,7 +219,7 @@ if (contactForm) {
 function animateStats() {
     statNumbers.forEach(stat => {
         const target = parseInt(stat.getAttribute('data-count'));
-        const increment = target / 100;
+        const increment = target / 50;
         let current = 0;
         
         const timer = setInterval(() => {
@@ -285,137 +230,9 @@ function animateStats() {
             } else {
                 stat.textContent = Math.floor(current) + '+';
             }
-        }, 20);
+        }, 30);
     });
 }
-
-// Show Notification
-function showNotification(message, type) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-            <span>${message}</span>
-        </div>
-        <button class="notification-close">
-            <i class="fas fa-times"></i>
-        </button>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Show notification
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 5000);
-    
-    // Close button
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.addEventListener('click', () => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    });
-}
-
-// Add notification styles
-const notificationStyles = document.createElement('style');
-notificationStyles.textContent = `
-    .notification {
-        position: fixed;
-        top: 100px;
-        right: 2rem;
-        background-color: var(--soft-black);
-        color: var(--ivory);
-        padding: 1rem 1.5rem;
-        border-radius: 4px;
-        box-shadow: var(--shadow-heavy);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        z-index: 3000;
-        transform: translateX(100%);
-        opacity: 0;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        min-width: 300px;
-        max-width: 400px;
-    }
-    
-    .notification.show {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    
-    .notification.success {
-        border-right: 4px solid #4CAF50;
-    }
-    
-    .notification.error {
-        border-right: 4px solid #f44336;
-    }
-    
-    .notification-content {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-    }
-    
-    .notification-content i {
-        font-size: 1.2rem;
-    }
-    
-    .notification.success .notification-content i {
-        color: #4CAF50;
-    }
-    
-    .notification.error .notification-content i {
-        color: #f44336;
-    }
-    
-    .notification-close {
-        background: none;
-        border: none;
-        color: var(--ivory);
-        opacity: 0.7;
-        cursor: pointer;
-        transition: opacity 0.3s ease;
-    }
-    
-    .notification-close:hover {
-        opacity: 1;
-    }
-`;
-document.head.appendChild(notificationStyles);
-
-// Parallax Effect for Background Statues
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const statue1 = document.querySelector('.statue-1');
-    const statue2 = document.querySelector('.statue-2');
-    
-    if (statue1) {
-        statue1.style.transform = `translateY(${scrollY * 0.05}px)`;
-    }
-    
-    if (statue2) {
-        statue2.style.transform = `translateY(${scrollY * 0.03}px)`;
-    }
-});
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -435,17 +252,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Initialize with active nav link
+// Parallax effect for background statues
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const statueBg = document.querySelector('.statue-background');
+    
+    if (statueBg) {
+        statueBg.style.transform = `translateY(${scrollY * 0.05}px)`;
+    }
+});
+
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    // Add hover effects to portfolio items
-    portfolioItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'translateY(-10px)';
-            item.style.transition = 'transform 0.3s ease';
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'translateY(0)';
-        });
+    // Add initial animations
+    const heroElements = document.querySelectorAll('.hero-text > *');
+    heroElements.forEach((el, index) => {
+        setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        }, index * 200 + 500);
     });
 });
