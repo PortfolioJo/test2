@@ -1,5 +1,5 @@
 // ===========================================
-// Main Application
+// Main Application - محسّن للسرعة
 // ===========================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,13 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initHoverEffects();
     initProjectModal();
     initContactForm();
-    
-    // تأخير تحميل الأنيميشنات للحصول على سرعة أفضل
-    setTimeout(initAnimations, 100);
+    initPageNavigation();
 });
 
 // ===========================================
-// Navigation
+// Navigation - محسّن
 // ===========================================
 
 function initNavigation() {
@@ -37,16 +35,27 @@ function initNavigation() {
     
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (navMenu.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = '';
+        link.addEventListener('click', function(e) {
+            // منع السلوك الافتراضي للروابط الداخلية
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                
+                // إغلاق القائمة المتنقلة إذا كانت مفتوحة
+                if (navMenu.classList.contains('active')) {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                // الانتقال السريع للقسم
+                const targetId = href.substring(1);
+                navigateToSection(targetId);
+                
+                // تحديث الرابط النشط
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
             }
-            
-            // Update active link
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
         });
     });
     
@@ -57,34 +66,78 @@ function initNavigation() {
         } else {
             header.classList.remove('scrolled');
         }
-        
-        // Update active nav link based on scroll position
-        updateActiveNavLink();
+    });
+}
+
+// ===========================================
+// Page Navigation - تنقل سريع بين الأقسام
+// ===========================================
+
+function initPageNavigation() {
+    // جعل جميع الأقسام مرئية فوراً
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.style.opacity = '1';
+        section.style.visibility = 'visible';
+        section.style.transform = 'translateY(0)';
     });
     
-    // Update active navigation link based on scroll position
-    function updateActiveNavLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPos = window.scrollY + 100;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }
+    // استماع لأحداث التمرير للتنقل السريع
+    let isScrolling = false;
     
-    // Initial update
-    updateActiveNavLink();
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            isScrolling = true;
+            
+            setTimeout(function() {
+                // تحديث الروابط النشطة
+                updateActiveNavLink();
+                isScrolling = false;
+            }, 100);
+        }
+    }, { passive: true });
+}
+
+// تحديث الروابط النشطة
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav__link');
+    const scrollPos = window.scrollY + 100;
+    
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === `#${currentSection}` || (href === '#hero' && currentSection === '')) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// التنقل السريع للقسم
+function navigateToSection(sectionId) {
+    const targetSection = document.getElementById(sectionId);
+    if (!targetSection) return;
+    
+    // حساب الموضع مع تعديل للهيدر
+    const headerHeight = document.getElementById('header').offsetHeight;
+    const targetPosition = targetSection.offsetTop - headerHeight;
+    
+    // التمرير السريع
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
 }
 
 // ===========================================
@@ -111,10 +164,10 @@ function initThemeSwitcher() {
         updateThemeIcon(newTheme);
         
         // Add animation
-        this.style.transform = 'rotate(360deg)';
+        this.style.transform = 'rotate(180deg)';
         setTimeout(() => {
             this.style.transform = 'rotate(0deg)';
-        }, 300);
+        }, 200);
     });
     
     function updateThemeIcon(theme) {
@@ -151,10 +204,10 @@ function initLanguageSwitcher() {
         localStorage.setItem('aseel-lang', newLang);
         
         // Add animation
-        this.style.transform = 'rotate(360deg)';
+        this.style.transform = 'rotate(180deg)';
         setTimeout(() => {
             this.style.transform = 'rotate(0deg)';
-        }, 300);
+        }, 200);
     });
     
     function setLanguage(lang) {
@@ -389,145 +442,6 @@ function updateTexts(lang) {
 }
 
 // ===========================================
-// Animations (محسّنة للسرعة)
-// ===========================================
-
-function initAnimations() {
-    if (typeof gsap === 'undefined') return;
-    
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Hero animations - سريعة
-    gsap.from('.hero__label', {
-        y: 10,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power2.out'
-    });
-    
-    gsap.from('.hero__title-line--1', {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        delay: 0.2,
-        ease: 'power2.out'
-    });
-    
-    gsap.from('.hero__title-line--2', {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        delay: 0.3,
-        ease: 'power2.out'
-    });
-    
-    gsap.from('.hero__subtitle', {
-        y: 15,
-        opacity: 0,
-        duration: 0.6,
-        delay: 0.4,
-        ease: 'power2.out'
-    });
-    
-    gsap.from('.hero__actions', {
-        y: 15,
-        opacity: 0,
-        duration: 0.6,
-        delay: 0.5,
-        ease: 'power2.out'
-    });
-    
-    // Hero scroll line animation
-    gsap.to('.hero__scroll-line', {
-        height: 0,
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power2.inOut'
-    });
-    
-    // Fast section animations with early trigger
-    gsap.utils.toArray('.section').forEach(section => {
-        const title = section.querySelector('.section__title');
-        const subtitle = section.querySelector('.section__subtitle');
-        
-        if (title) {
-            gsap.from(title, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 20,
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.out'
-            });
-        }
-        
-        if (subtitle) {
-            gsap.from(subtitle, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 15,
-                opacity: 0,
-                duration: 0.4,
-                delay: 0.1,
-                ease: 'power2.out'
-            });
-        }
-    });
-    
-    // Fast project cards animation
-    const projectCards = document.querySelectorAll('.project-card');
-    gsap.from(projectCards, {
-        scrollTrigger: {
-            trigger: '.projects__grid',
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.05,
-        ease: 'power2.out'
-    });
-    
-    // Fast service cards animation
-    const serviceCards = document.querySelectorAll('.service-card');
-    gsap.from(serviceCards, {
-        scrollTrigger: {
-            trigger: '.services__grid',
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 20,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: 'power2.out'
-    });
-    
-    // Fast gallery items animation
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    gsap.from(galleryItems, {
-        scrollTrigger: {
-            trigger: '.gallery__grid',
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-        },
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.03,
-        ease: 'back.out(1.2)'
-    });
-}
-
-// ===========================================
 // Current Year
 // ===========================================
 
@@ -539,69 +453,21 @@ function initCurrentYear() {
 }
 
 // ===========================================
-// Scroll Effects (محسّنة)
+// Scroll Effects - محسّنة للسرعة
 // ===========================================
 
 function initScrollEffects() {
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (href === '#') return;
-            
-            const targetElement = document.querySelector(href);
-            if (targetElement) {
-                e.preventDefault();
-                
-                // Smooth scroll بدون مكتبات خارجية (أسرع)
-                const targetPosition = targetElement.offsetTop - 80;
-                const startPosition = window.pageYOffset;
-                const distance = targetPosition - startPosition;
-                const duration = 500;
-                let start = null;
-                
-                function animation(currentTime) {
-                    if (start === null) start = currentTime;
-                    const timeElapsed = currentTime - start;
-                    const run = ease(timeElapsed, startPosition, distance, duration);
-                    window.scrollTo(0, run);
-                    if (timeElapsed < duration) requestAnimationFrame(animation);
-                }
-                
-                function ease(t, b, c, d) {
-                    t /= d / 2;
-                    if (t < 1) return c / 2 * t * t + b;
-                    t--;
-                    return -c / 2 * (t * (t - 2) - 1) + b;
-                }
-                
-                requestAnimationFrame(animation);
-            }
-        });
-    });
-    
-    // Scroll progress indicator
+    // إنشاء شريط التقدم
     const progressBar = document.createElement('div');
     progressBar.className = 'scroll-progress';
-    progressBar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 3px;
-        background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
-        z-index: 9999;
-        transition: width 0.1s ease;
-        pointer-events: none;
-    `;
     document.body.appendChild(progressBar);
     
+    // تحديث شريط التقدم
     window.addEventListener('scroll', function() {
         const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (window.scrollY / windowHeight) * 100;
         progressBar.style.width = scrolled + '%';
-    });
+    }, { passive: true });
 }
 
 // ===========================================
@@ -614,7 +480,7 @@ function initHoverEffects() {
     
     projectCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
+            this.style.transform = 'translateY(-4px)';
         });
         
         card.addEventListener('mouseleave', function() {
@@ -639,7 +505,7 @@ function initHoverEffects() {
         item.addEventListener('mouseleave', function() {
             image.style.transform = 'scale(1)';
             overlay.style.opacity = '0';
-            title.style.transform = 'translateY(20px)';
+            title.style.transform = 'translateY(10px)';
         });
     });
     
@@ -777,7 +643,7 @@ function initContactForm() {
             labels.forEach(label => {
                 const input = this.querySelector(`#${label.getAttribute('for')}`);
                 if (input && !input.value) {
-                    label.style.top = '1rem';
+                    label.style.top = '0.75rem';
                     label.style.fontSize = '1rem';
                 }
             });
@@ -799,7 +665,7 @@ function initContactForm() {
             
             input.addEventListener('blur', function() {
                 if (!this.value) {
-                    label.style.top = '1rem';
+                    label.style.top = '0.75rem';
                     label.style.fontSize = '1rem';
                     label.style.color = 'var(--color-text-tertiary)';
                 }
