@@ -1,3 +1,10 @@
+// Initialize AOS (Animate On Scroll)
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+});
+
 // DOM Elements
 const loader = document.querySelector('.loader');
 const header = document.querySelector('.header');
@@ -5,18 +12,23 @@ const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 const navLinks = document.querySelectorAll('.nav-link');
 const backToTop = document.querySelector('.back-to-top');
+const filterBtns = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-item');
-const viewProjectBtns = document.querySelectorAll('.view-project');
-const modal = document.querySelector('.modal');
+const viewBtns = document.querySelectorAll('.view-btn');
+const projectModal = document.querySelector('.project-modal');
 const modalClose = document.querySelector('.modal-close');
 const contactForm = document.querySelector('.contact-form');
+const statNumbers = document.querySelectorAll('.stat-number');
 
 // Page Loader
 window.addEventListener('load', () => {
     setTimeout(() => {
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
-    }, 1500);
+        
+        // Start counter animations
+        animateStats();
+    }, 2000);
 });
 
 // Header Scroll Effect
@@ -25,10 +37,10 @@ window.addEventListener('scroll', () => {
     
     // Header background effect
     if (scrollY > 100) {
-        header.style.backgroundColor = 'rgba(242, 241, 238, 0.95)';
+        header.style.backgroundColor = 'rgba(242, 241, 238, 0.98)';
         header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
     } else {
-        header.style.backgroundColor = 'rgba(242, 241, 238, 0.9)';
+        header.style.backgroundColor = 'rgba(242, 241, 238, 0.95)';
         header.style.boxShadow = 'none';
     }
     
@@ -63,12 +75,11 @@ window.addEventListener('scroll', () => {
 // Mobile Menu Toggle
 menuToggle.addEventListener('click', () => {
     nav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
     
     if (nav.classList.contains('active')) {
-        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
         document.body.style.overflow = 'hidden';
     } else {
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
         document.body.style.overflow = 'auto';
     }
 });
@@ -77,7 +88,7 @@ menuToggle.addEventListener('click', () => {
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         nav.classList.remove('active');
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        menuToggle.classList.remove('active');
         document.body.style.overflow = 'auto';
     });
 });
@@ -90,132 +101,320 @@ backToTop.addEventListener('click', () => {
     });
 });
 
-// Portfolio Item Hover Effect
-portfolioItems.forEach(item => {
-    const image = item.querySelector('.statue-image');
-    
-    item.addEventListener('mouseenter', () => {
-        image.style.transform = 'scale(1.05)';
-        image.style.transition = 'transform 4s ease';
-    });
-    
-    item.addEventListener('mouseleave', () => {
-        image.style.transform = 'scale(1)';
+// Portfolio Filtering
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        const filterValue = btn.getAttribute('data-filter');
+        
+        // Filter portfolio items
+        portfolioItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            
+            if (filterValue === 'all' || filterValue === category) {
+                item.style.display = 'block';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 100);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
+            }
+        });
     });
 });
 
 // View Project Modal
-viewProjectBtns.forEach(btn => {
+viewBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         
-        const projectItem = btn.closest('.portfolio-item');
-        const projectTitle = projectItem.querySelector('h3').textContent;
-        const projectCategory = projectItem.querySelector('p').textContent;
-        const projectImage = projectItem.querySelector('.statue-image').style.backgroundImage;
+        const portfolioItem = btn.closest('.portfolio-item');
+        const projectTitle = portfolioItem.querySelector('h3').textContent;
+        const projectCategory = portfolioItem.querySelector('p').textContent;
+        const projectImage = portfolioItem.querySelector('img').src;
         
         // Set modal content
-        const modalBody = modal.querySelector('.modal-body');
+        const modalBody = projectModal.querySelector('.modal-body');
         modalBody.innerHTML = `
-            <div class="modal-project">
+            <div class="project-modal-content">
                 <div class="modal-header">
                     <h2>${projectTitle}</h2>
-                    <p>${projectCategory}</p>
+                    <p class="modal-category">${projectCategory}</p>
                 </div>
                 
-                <div class="modal-image" style="background-image: ${projectImage}; height: 400px; margin: 2rem 0;"></div>
+                <div class="modal-image">
+                    <img src="${projectImage}" alt="${projectTitle}">
+                </div>
                 
                 <div class="modal-details">
                     <div class="modal-section">
                         <h3>عن المشروع</h3>
-                        <p>هذا المشروع يمثل رؤية فنية حديثة للجماليات الكلاسيكية، حيث تم دمج عناصر الفن الإغريقي القديم مع تقنيات التصميم الحديثة لخلق تجربة بصرية فريدة.</p>
+                        <p>هذا المشروع يمثل رؤية فنية حديثة للجماليات الكلاسيكية، حيث تم دمج عناصر الفن الإغريقي القديم مع تقنيات التصميم الحديثة لخلق تجربة بصرية فريدة. العمل يعكس التزامي بالدقة والتفاصيل التي تميز الفن الكلاسيكي.</p>
                     </div>
                     
                     <div class="modal-section">
                         <h3>التحديات</h3>
-                        <p>تحويل المفهوم الكلاسيكي إلى تجربة رقمية حديثة مع الحفاظ على الجوهر الفني الأصيل، وضمان أن تكون التجربة سلسة على جميع الأجهزة.</p>
+                        <p>تحويل المفهوم الكلاسيكي إلى تصميم حديث مع الحفاظ على الجوهر الفني الأصيل، وضمان أن يكون التصميم عمليًا وجذابًا في نفس الوقت.</p>
                     </div>
                     
                     <div class="modal-section">
                         <h3>الحلول</h3>
-                        <p>استخدام تقنيات CSS و JavaScript المتقدمة لخلق تأثيرات بصرية تشبه الفن الكلاسيكي، مع التركيز على الأداء وسرعة التحميل.</p>
+                        <p>استخدام تقنيات التصميم المتقدمة مع الحفاظ على بساطة وأصالة الفن الكلاسيكي، واختيار الألوان والخطوط المناسبة التي تعكس الفخامة والحداثة في آن واحد.</p>
                     </div>
                     
                     <div class="modal-section">
-                        <h3>الأدوات</h3>
-                        <div class="tools">
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                            <span>JavaScript</span>
-                            <span>Adobe Creative Suite</span>
+                        <h3>الأدوات والتقنيات</h3>
+                        <div class="modal-tools">
+                            <span>Adobe Illustrator</span>
+                            <span>Adobe Photoshop</span>
                             <span>Figma</span>
+                            <span>Procreate</span>
+                            <span>After Effects</span>
                         </div>
                     </div>
+                    
+                    <div class="modal-section">
+                        <h3>مدة التنفيذ</h3>
+                        <p>3 أسابيع</p>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn-primary" id="close-modal">
+                        <span>إغلاق</span>
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
             </div>
         `;
         
         // Show modal
-        modal.classList.add('active');
+        projectModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Add event listener to close button in modal
+        const closeModalBtn = document.getElementById('close-modal');
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                projectModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
     });
 });
 
 // Close Modal
 modalClose.addEventListener('click', () => {
-    modal.classList.remove('active');
+    projectModal.classList.remove('active');
     document.body.style.overflow = 'auto';
 });
 
 // Close modal when clicking outside
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.classList.remove('active');
+projectModal.addEventListener('click', (e) => {
+    if (e.target === projectModal) {
+        projectModal.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
 });
 
 // Contact Form Submission
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const service = document.getElementById('service').value;
+        const message = document.getElementById('message').value;
+        
+        // Basic validation
+        if (!name || !email || !service || !message) {
+            showNotification('يرجى ملء جميع الحقول', 'error');
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('يرجى إدخال بريد إلكتروني صحيح', 'error');
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = contactForm.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>جاري الإرسال...</span>';
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            showNotification(`شكراً ${name}! تم استلام رسالتك بنجاح. سأتواصل معك قريباً.`, 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 2000);
+    });
+}
+
+// Animate Stats Counter
+function animateStats() {
+    statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        const increment = target / 100;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current > target) {
+                stat.textContent = target + '+';
+                clearInterval(timer);
+            } else {
+                stat.textContent = Math.floor(current) + '+';
+            }
+        }, 20);
+    });
+}
+
+// Show Notification
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        </div>
+        <button class="notification-close">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
     
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+    document.body.appendChild(notification);
     
-    // Basic validation
-    if (!name || !email || !message) {
-        alert('يرجى ملء جميع الحقول');
-        return;
-    }
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('يرجى إدخال بريد إلكتروني صحيح');
-        return;
-    }
-    
-    // In a real application, you would send the data to a server here
-    // For this example, we'll just show a success message
-    
-    // Show loading state
-    const submitBtn = contactForm.querySelector('.form-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'جاري الإرسال...';
-    submitBtn.disabled = true;
-    
-    // Simulate API call
+    // Show notification
     setTimeout(() => {
-        alert(`شكراً ${name}! تم استلام رسالتك بنجاح. سأتواصل معك قريباً على ${email}`);
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Reset button
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }, 1500);
+        notification.classList.add('show');
+    }, 100);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 5000);
+    
+    // Close button
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    });
+}
+
+// Add notification styles
+const notificationStyles = document.createElement('style');
+notificationStyles.textContent = `
+    .notification {
+        position: fixed;
+        top: 100px;
+        right: 2rem;
+        background-color: var(--soft-black);
+        color: var(--ivory);
+        padding: 1rem 1.5rem;
+        border-radius: 4px;
+        box-shadow: var(--shadow-heavy);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        z-index: 3000;
+        transform: translateX(100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        min-width: 300px;
+        max-width: 400px;
+    }
+    
+    .notification.show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
+    .notification.success {
+        border-right: 4px solid #4CAF50;
+    }
+    
+    .notification.error {
+        border-right: 4px solid #f44336;
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .notification-content i {
+        font-size: 1.2rem;
+    }
+    
+    .notification.success .notification-content i {
+        color: #4CAF50;
+    }
+    
+    .notification.error .notification-content i {
+        color: #f44336;
+    }
+    
+    .notification-close {
+        background: none;
+        border: none;
+        color: var(--ivory);
+        opacity: 0.7;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+    }
+    
+    .notification-close:hover {
+        opacity: 1;
+    }
+`;
+document.head.appendChild(notificationStyles);
+
+// Parallax Effect for Background Statues
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const statue1 = document.querySelector('.statue-1');
+    const statue2 = document.querySelector('.statue-2');
+    
+    if (statue1) {
+        statue1.style.transform = `translateY(${scrollY * 0.05}px)`;
+    }
+    
+    if (statue2) {
+        statue2.style.transform = `translateY(${scrollY * 0.03}px)`;
+    }
 });
 
 // Smooth scrolling for anchor links
@@ -236,138 +435,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Initialize animations on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.querySelectorAll('.portfolio-item, .quote-block, .detail-block').forEach(el => {
-    observer.observe(el);
-});
-
-// Add CSS for animations
-const style = document.createElement('style');
-style.textContent = `
-    .animate-in {
-        animation: fadeInUp 0.8s ease forwards;
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .nav.active {
-        display: block;
-        position: fixed;
-        top: 80px;
-        right: 0;
-        width: 100%;
-        background-color: var(--ivory);
-        padding: 2rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    .nav.active .nav-list {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .modal-project {
-        padding: 1rem;
-    }
-    
-    .modal-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    
-    .modal-header h2 {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .modal-section {
-        margin-bottom: 2rem;
-    }
-    
-    .modal-section h3 {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        position: relative;
-        display: inline-block;
-    }
-    
-    .modal-section h3::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        right: 0;
-        width: 40px;
-        height: 1px;
-        background-color: var(--gold);
-    }
-    
-    .modal-section p {
-        line-height: 1.7;
-        color: var(--soft-black);
-        opacity: 0.8;
-    }
-    
-    .tools {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-    
-    .tools span {
-        padding: 0.5rem 1rem;
-        background-color: var(--light-gray);
-        color: var(--soft-black);
-        font-size: 0.9rem;
-        border-radius: 2px;
-    }
-`;
-document.head.appendChild(style);
-
-// Initialize
+// Initialize with active nav link
 document.addEventListener('DOMContentLoaded', () => {
-    // Add initial animation class to hero elements
-    const heroTitle = document.querySelector('.hero-title');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    const heroQuote = document.querySelector('.hero-quote');
-    const heroBtn = document.querySelector('.hero-btn');
-    
-    setTimeout(() => {
-        heroTitle.classList.add('animate-in');
-    }, 500);
-    
-    setTimeout(() => {
-        heroSubtitle.classList.add('animate-in');
-    }, 800);
-    
-    setTimeout(() => {
-        heroQuote.classList.add('animate-in');
-    }, 1100);
-    
-    setTimeout(() => {
-        heroBtn.classList.add('animate-in');
-    }, 1400);
+    // Add hover effects to portfolio items
+    portfolioItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'translateY(-10px)';
+            item.style.transition = 'transform 0.3s ease';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translateY(0)';
+        });
+    });
 });
