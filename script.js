@@ -3,14 +3,15 @@
 // ===========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all modules
     initNavigation();
     initThemeSwitcher();
+    initLanguageSwitcher();
     initAnimations();
     initCurrentYear();
     initScrollEffects();
     initHoverEffects();
     initProjectModal();
+    initContactForm();
 });
 
 // ===========================================
@@ -126,52 +127,291 @@ function initThemeSwitcher() {
 }
 
 // ===========================================
+// Language Switcher
+// ===========================================
+
+function initLanguageSwitcher() {
+    const langToggle = document.getElementById('languageToggle');
+    const langTexts = document.querySelectorAll('.language-toggle__text');
+    
+    // Get saved language or default to english
+    const savedLang = localStorage.getItem('aseel-lang') || 'en';
+    setLanguage(savedLang);
+    updateLangToggle(savedLang);
+    
+    // Toggle language
+    langToggle.addEventListener('click', function() {
+        const currentLang = document.documentElement.getAttribute('lang') || 'en';
+        const newLang = currentLang === 'en' ? 'ar' : 'en';
+        
+        setLanguage(newLang);
+        updateLangToggle(newLang);
+        localStorage.setItem('aseel-lang', newLang);
+        
+        // Add animation
+        this.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            this.style.transform = 'rotate(0deg)';
+        }, 300);
+    });
+    
+    function setLanguage(lang) {
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        updateTexts(lang);
+        
+        // Update Font for Arabic
+        if (lang === 'ar') {
+            document.documentElement.style.setProperty('--font-body', "'Noto Sans Arabic', sans-serif");
+        } else {
+            document.documentElement.style.setProperty('--font-body', "'Inter', sans-serif");
+        }
+    }
+    
+    function updateLangToggle(lang) {
+        langTexts.forEach(text => {
+            text.classList.toggle('hidden');
+        });
+    }
+}
+
+// ===========================================
+// Translations
+// ===========================================
+
+const translations = {
+    en: {
+        // Navigation
+        'nav.designer': 'Digital Designer',
+        'nav.home': 'Home',
+        'nav.about': 'About',
+        'nav.work': 'Work',
+        'nav.services': 'Services',
+        'nav.contact': 'Contact',
+        
+        // Language toggle
+        'lang.en': 'EN',
+        'lang.ar': 'AR',
+        
+        // Hero
+        'hero.subtitle': 'Digital Artistry',
+        'hero.title': 'Graphic & Digital Designer',
+        'hero.description': 'Crafting visual identities that blend minimalism, modern aesthetics, and emotional storytelling.',
+        'hero.viewPortfolio': 'View Portfolio',
+        'hero.startProject': 'Start a Project',
+        'hero.explore': 'Explore',
+        
+        // About
+        'about.title': 'Creative Philosophy',
+        'about.subtitle': 'Where art meets purpose in digital form',
+        'about.imageText': 'Visual Storyteller',
+        'about.heading': 'Design with Intention',
+        'about.description1': 'I specialize in transforming abstract concepts into compelling visual experiences that resonate with audiences. My approach combines artistic sensibility with strategic thinking.',
+        'about.description2': 'With over 5 years of experience in digital design, I\'ve collaborated with brands worldwide to build distinctive visual identities and memorable user experiences.',
+        'about.designerTitle': 'Digital Designer',
+        
+        // Projects
+        'projects.title': 'Featured Work',
+        'projects.subtitle': 'Selected projects showcasing design excellence',
+        'projects.project1.category': 'Brand Identity',
+        'projects.project1.title': 'Luxury Fashion House',
+        'projects.project1.description': 'Complete visual identity for a high-end fashion brand blending heritage with modernity',
+        'projects.project2.category': 'Web Design',
+        'projects.project2.title': 'Interactive Art Gallery',
+        'projects.project2.description': 'Digital platform for art exhibition with immersive user experience',
+        'projects.project3.category': 'Advertising',
+        'projects.project3.title': 'Premium Beverage Campaign',
+        'projects.project3.description': 'Comprehensive advertising campaign with professional photography',
+        'projects.tags.logo': 'Logo Design',
+        'projects.tags.identity': 'Visual Identity',
+        'projects.tags.typography': 'Typography',
+        'projects.tags.uiux': 'UI/UX Design',
+        'projects.tags.interaction': 'Interaction',
+        'projects.tags.digitalArt': 'Digital Art',
+        'projects.tags.advertising': 'Advertising',
+        'projects.tags.photography': 'Photography',
+        'projects.tags.marketing': 'Marketing',
+        'projects.viewCase': 'View Case Study',
+        
+        // Services
+        'services.title': 'Design Services',
+        'services.subtitle': 'Transforming visions into visual realities',
+        'services.service1.title': 'Web Design',
+        'services.service1.description': 'Contemporary website designs that marry aesthetics with functionality, focusing on user experience and performance.',
+        'services.service2.title': 'Brand Identity',
+        'services.service2.description': 'Complete visual identity systems that express brand values and create memorable impressions.',
+        'services.service3.title': 'Digital Art',
+        'services.service3.description': 'Engaging visual content for social media that enhances brand presence and follows modern trends.',
+        
+        // Contact
+        'contact.title': 'Let\'s Connect',
+        'contact.subtitle': 'Ready to bring your vision to life?',
+        'contact.heading': 'Get in Touch',
+        'contact.description': 'Have a project in mind? I\'d love to hear about it. Let\'s discuss how we can transform your vision into reality.',
+        'contact.emailTitle': 'Email',
+        'contact.phoneTitle': 'Phone',
+        'contact.locationTitle': 'Location',
+        'contact.location': 'Available Worldwide',
+        'contact.form.name': 'Your Name',
+        'contact.form.email': 'Email Address',
+        'contact.form.message': 'Project Details',
+        'contact.form.submit': 'Send Message',
+        'contact.socialTitle': 'Follow My Work',
+        
+        // Modal
+        'modal.overview': 'Project Overview',
+        'modal.services': 'Services Provided',
+        'modal.startProject': 'Start a Similar Project',
+        
+        // Footer
+        'footer.rights': 'All rights reserved'
+    },
+    ar: {
+        // Navigation
+        'nav.designer': 'مصمم رقمي',
+        'nav.home': 'الرئيسية',
+        'nav.about': 'عنّي',
+        'nav.work': 'أعمالي',
+        'nav.services': 'خدماتي',
+        'nav.contact': 'اتصل بي',
+        
+        // Language toggle
+        'lang.en': 'EN',
+        'lang.ar': 'AR',
+        
+        // Hero
+        'hero.subtitle': 'فنون رقمية',
+        'hero.title': 'مصمم جرافيك ورقمي',
+        'hero.description': 'أصمم هويات بصرية تجمع بين البساطة والجمال المعاصر وسرد القصص العاطفية.',
+        'hero.viewPortfolio': 'عرض الأعمال',
+        'hero.startProject': 'ابدأ مشروع',
+        'hero.explore': 'استكشف',
+        
+        // About
+        'about.title': 'الفلسفة الإبداعية',
+        'about.subtitle': 'حيث يلتقي الفن بالغرض في الشكل الرقمي',
+        'about.imageText': 'راوي قصص بصري',
+        'about.heading': 'تصميم بقصد',
+        'about.description1': 'أتخصص في تحويل المفاهيم المجردة إلى تجارب بصرية مؤثرة تلقى صدى لدى الجمهور. يجمع أسلوبي بين الحس الفني والتفكير الاستراتيجي.',
+        'about.description2': 'مع أكثر من 5 سنوات من الخبرة في التصميم الرقمي، تعاونت مع علامات تجارية عالمية لبناء هويات بصرية مميزة وتجارب مستخدم لا تنسى.',
+        'about.designerTitle': 'مصمم رقمي',
+        
+        // Projects
+        'projects.title': 'أعمال مميزة',
+        'projects.subtitle': 'مشاريع مختارة تعرض التميز في التصميم',
+        'projects.project1.category': 'الهوية البصرية',
+        'projects.project1.title': 'دار أزياء فاخرة',
+        'projects.project1.description': 'هوية بصرية كاملة لعلامة أزياء فاخرة تجمع بين التراث والحداثة',
+        'projects.project2.category': 'تصميم الويب',
+        'projects.project2.title': 'معرض فني تفاعلي',
+        'projects.project2.description': 'منصة رقمية لمعرض فني مع تجربة مستخدم غامرة',
+        'projects.project3.category': 'إعلانات',
+        'projects.project3.title': 'حملة مشروبات متميزة',
+        'projects.project3.description': 'حملة إعلانية شاملة مع تصوير احترافي',
+        'projects.tags.logo': 'تصميم الشعار',
+        'projects.tags.identity': 'الهوية البصرية',
+        'projects.tags.typography': 'الخطوط',
+        'projects.tags.uiux': 'تصميم واجهة المستخدم',
+        'projects.tags.interaction': 'تفاعلية',
+        'projects.tags.digitalArt': 'فن رقمي',
+        'projects.tags.advertising': 'إعلان',
+        'projects.tags.photography': 'تصوير',
+        'projects.tags.marketing': 'تسويق',
+        'projects.viewCase': 'عرض دراسة الحالة',
+        
+        // Services
+        'services.title': 'خدمات التصميم',
+        'services.subtitle': 'تحويل الرؤى إلى واقع بصري',
+        'services.service1.title': 'تصميم الويب',
+        'services.service1.description': 'تصاميم مواقع ويب معاصرة تجمع بين الجمالية والوظيفة، مع التركيز على تجربة المستخدم والأداء.',
+        'services.service2.title': 'الهوية البصرية',
+        'services.service2.description': 'أنظمة هوية بصرية كاملة تعبر عن قيم العلامة التجارية وتخلق انطباعات لا تنسى.',
+        'services.service3.title': 'الفن الرقمي',
+        'services.service3.description': 'محتوى بصري جذاب لوسائل التواصل الاجتماعي يعزز حضور العلامة التجارية ويواكب الاتجاهات الحديثة.',
+        
+        // Contact
+        'contact.title': 'لنتواصل',
+        'contact.subtitle': 'مستعد لتحويل رؤيتك إلى واقع؟',
+        'contact.heading': 'تواصل معي',
+        'contact.description': 'هل لديك مشروع في ذهنك؟ يسعدني سماع أفكارك. لنتناقش حول كيفية تحويل رؤيتك إلى واقع.',
+        'contact.emailTitle': 'البريد الإلكتروني',
+        'contact.phoneTitle': 'الهاتف',
+        'contact.locationTitle': 'الموقع',
+        'contact.location': 'متاح عالمياً',
+        'contact.form.name': 'اسمك',
+        'contact.form.email': 'البريد الإلكتروني',
+        'contact.form.message': 'تفاصيل المشروع',
+        'contact.form.submit': 'إرسال الرسالة',
+        'contact.socialTitle': 'تابع أعمالي',
+        
+        // Modal
+        'modal.overview': 'نظرة عامة على المشروع',
+        'modal.services': 'الخدمات المقدمة',
+        'modal.startProject': 'ابدأ مشروعاً مماثلاً',
+        
+        // Footer
+        'footer.rights': 'جميع الحقوق محفوظة'
+    }
+};
+
+function updateTexts(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+}
+
+// ===========================================
 // Animations
 // ===========================================
 
 function initAnimations() {
-    // Check if GSAP is loaded
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP not loaded');
-        return;
-    }
+    if (typeof gsap === 'undefined') return;
     
     gsap.registerPlugin(ScrollTrigger);
     
     // Hero animations
-    const heroTimeline = gsap.timeline();
+    gsap.from('.hero__label', {
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+    });
     
-    heroTimeline
-        .from('.hero__label', {
-            y: 20,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        })
-        .from('.hero__title-line--1', {
-            y: 60,
-            opacity: 0,
-            duration: 1.2,
-            ease: 'power3.out'
-        }, '-=0.8')
-        .from('.hero__title-line--2', {
-            y: 60,
-            opacity: 0,
-            duration: 1.2,
-            ease: 'power3.out'
-        }, '-=0.8')
-        .from('.hero__subtitle', {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        }, '-=0.6')
-        .from('.hero__actions', {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        }, '-=0.4');
+    gsap.from('.hero__title-line--1', {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: 'power3.out'
+    });
+    
+    gsap.from('.hero__title-line--2', {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: 'power3.out'
+    });
+    
+    gsap.from('.hero__subtitle', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.7,
+        ease: 'power3.out'
+    });
+    
+    gsap.from('.hero__actions', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.9,
+        ease: 'power3.out'
+    });
     
     // Hero scroll line animation
     gsap.to('.hero__scroll-line', {
@@ -182,27 +422,7 @@ function initAnimations() {
         ease: 'power2.inOut'
     });
     
-    // Floating ornaments
-    gsap.to('.hero__ornament--1', {
-        y: 20,
-        rotation: 5,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-    });
-    
-    gsap.to('.hero__ornament--2', {
-        y: -20,
-        rotation: -5,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: 0.5
-    });
-    
-    // Fade up animations for sections
+    // Section animations
     gsap.utils.toArray('.section').forEach(section => {
         const title = section.querySelector('.section__title');
         const subtitle = section.querySelector('.section__subtitle');
@@ -245,7 +465,7 @@ function initAnimations() {
         y: 60,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.15,
+        stagger: 0.1,
         ease: 'power3.out'
     });
     
@@ -261,20 +481,6 @@ function initAnimations() {
         duration: 0.6,
         stagger: 0.1,
         ease: 'power3.out'
-    });
-    
-    // Gallery items animation
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    gsap.from(galleryItems, {
-        scrollTrigger: {
-            trigger: '.gallery__grid',
-            start: 'top 80%'
-        },
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: 'back.out(1.7)'
     });
 }
 
@@ -305,23 +511,9 @@ function initScrollEffects() {
             if (targetElement) {
                 e.preventDefault();
                 
-                // Animate scroll
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: {
-                        y: targetElement,
-                        offsetY: 80
-                    },
-                    ease: 'power3.inOut'
-                });
-                
-                // Add click animation
-                gsap.to(this, {
-                    scale: 0.9,
-                    duration: 0.1,
-                    yoyo: true,
-                    repeat: 1,
-                    ease: 'power2.inOut'
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -335,9 +527,9 @@ function initScrollEffects() {
         top: 0;
         left: 0;
         width: 0%;
-        height: 2px;
+        height: 3px;
         background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
-        z-index: var(--z-tooltip);
+        z-index: 9999;
         transition: width 0.1s ease;
         pointer-events: none;
     `;
@@ -360,83 +552,11 @@ function initHoverEffects() {
     
     projectCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                y: -8,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-            
-            const link = this.querySelector('.project-card__link');
-            if (link) {
-                gsap.to(link, {
-                    gap: '15px',
-                    duration: 0.3,
-                    ease: 'power2.out'
-                });
-            }
+            this.style.transform = 'translateY(-8px)';
         });
         
         card.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                y: 0,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
-            
-            const link = this.querySelector('.project-card__link');
-            if (link) {
-                gsap.to(link, {
-                    gap: '8px',
-                    duration: 0.3,
-                    ease: 'power2.in'
-                });
-            }
-        });
-    });
-    
-    // Gallery items hover effect
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            gsap.to(this.querySelector('.gallery-item__image'), {
-                scale: 1.1,
-                duration: 0.6,
-                ease: 'power2.out'
-            });
-            
-            gsap.to(this.querySelector('.gallery-item__overlay'), {
-                opacity: 1,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-            
-            gsap.to(this.querySelector('.gallery-item__title'), {
-                y: 0,
-                duration: 0.4,
-                delay: 0.1,
-                ease: 'power2.out'
-            });
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            gsap.to(this.querySelector('.gallery-item__image'), {
-                scale: 1,
-                duration: 0.6,
-                ease: 'power2.in'
-            });
-            
-            gsap.to(this.querySelector('.gallery-item__overlay'), {
-                opacity: 0,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
-            
-            gsap.to(this.querySelector('.gallery-item__title'), {
-                y: 20,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
+            this.style.transform = 'translateY(0)';
         });
     });
     
@@ -445,58 +565,11 @@ function initHoverEffects() {
     
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                y: -4,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-            
-            const icon = this.querySelector('.service-card__icon');
-            if (icon) {
-                gsap.to(icon, {
-                    rotation: 10,
-                    duration: 0.5,
-                    ease: 'back.out(1.7)'
-                });
-            }
+            this.style.transform = 'translateY(-4px)';
         });
         
         card.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                y: 0,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
-            
-            const icon = this.querySelector('.service-card__icon');
-            if (icon) {
-                gsap.to(icon, {
-                    rotation: 0,
-                    duration: 0.5,
-                    ease: 'back.out(1.7)'
-                });
-            }
-        });
-    });
-    
-    // Social links hover effect
-    const socialLinks = document.querySelectorAll('.social-link');
-    
-    socialLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                y: -5,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-        
-        link.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                y: 0,
-                duration: 0.3,
-                ease: 'power2.in'
-            });
+            this.style.transform = 'translateY(0)';
         });
     });
 }
@@ -559,11 +632,13 @@ function initProjectModal() {
     
     function openProjectModal(projectId) {
         const project = projects[projectId];
+        const currentLang = document.documentElement.getAttribute('lang') || 'en';
         
         if (!project) return;
         
         // Update modal content
-        document.getElementById('modalCategory').textContent = project.category;
+        document.getElementById('modalCategory').textContent = 
+            currentLang === 'ar' ? 'الهوية البصرية' : project.category;
         document.getElementById('modalTitle').textContent = project.title;
         document.getElementById('modalYear').textContent = project.year;
         document.getElementById('modalDescription').textContent = project.description;
@@ -586,92 +661,73 @@ function initProjectModal() {
         // Show modal
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
-        // Animate modal in
-        gsap.fromTo(modal.querySelector('.modal__content'),
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }
-        );
     }
     
     function closeModal() {
-        // Animate modal out
-        gsap.to(modal.querySelector('.modal__content'), {
-            opacity: 0,
-            y: 20,
-            duration: 0.2,
-            ease: 'power3.in',
-            onComplete: () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
     }
 }
 
 // ===========================================
-// Utility Functions
+// Contact Form
 // ===========================================
 
-// Debounce function for scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Throttle function for resize events
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to a server
+            // For now, we'll just show a success message
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+            
+            // Reset labels
+            const labels = this.querySelectorAll('label');
+            labels.forEach(label => {
+                const input = this.querySelector(`#${label.getAttribute('for')}`);
+                if (input && !input.value) {
+                    label.style.top = '1rem';
+                    label.style.fontSize = '1rem';
+                }
+            });
+        });
+    }
+    
+    // Form label animation
+    const formGroups = document.querySelectorAll('.form-group');
+    formGroups.forEach(group => {
+        const input = group.querySelector('input, textarea');
+        const label = group.querySelector('label');
+        
+        if (input && label) {
+            input.addEventListener('focus', function() {
+                label.style.top = '-0.5rem';
+                label.style.fontSize = '0.875rem';
+                label.style.color = 'var(--color-accent-primary)';
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    label.style.top = '1rem';
+                    label.style.fontSize = '1rem';
+                    label.style.color = 'var(--color-text-tertiary)';
+                }
+            });
+            
+            // Check on load
+            if (input.value) {
+                label.style.top = '-0.5rem';
+                label.style.fontSize = '0.875rem';
+                label.style.color = 'var(--color-accent-primary)';
+            }
         }
-    };
-}
-
-// Handle window resize
-window.addEventListener('resize', throttle(function() {
-    // Refresh animations on resize
-    if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-    }
-}, 100));
-
-// Handle page visibility change
-document.addEventListener('visibilitychange', function() {
-    if (!document.hidden && typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.refresh();
-    }
-});
-
-// Handle scroll animations for fade-up elements
-function initScrollAnimations() {
-    const fadeUpElements = document.querySelectorAll('.fade-up');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
     });
-    
-    fadeUpElements.forEach(el => observer.observe(el));
 }
-
-// Initialize scroll animations
-initScrollAnimations();
