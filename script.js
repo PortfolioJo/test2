@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // مراقبة العناصر لإضافة تأثيرات
-    document.querySelectorAll('.service-card, .audience-card, .project-card, .process-step').forEach(card => {
+    document.querySelectorAll('.service-card, .audience-category, .mini-project, .process-step').forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -241,19 +241,21 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('%c📧 للتواصل: aseeljalal45@gmail.com | واتساب: +962785094075', 'color: #D4AF37; font-size: 11px; margin-top: 5px;');
     console.log('%c📁 مشاريع حية: test1, test4, test7', 'color: #D4AF37; font-size: 12px; padding: 8px; background: #F5EFE4; border-radius: 4px;');
     
-    // ========== تهيئة عناصر المشاريع ==========
-    initializeProjectCards();
+    // ========== تهيئة المشاريع ==========
+    initializeProjects();
     
     // ========== تأثيرات للبطاقات عند التحويم ==========
-    document.querySelectorAll('.service-card, .audience-card, .project-card').forEach(card => {
+    document.querySelectorAll('.service-card, .audience-category, .mini-project').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
             this.style.boxShadow = 'var(--shadow-elevated)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-            this.style.boxShadow = '';
+            if (!this.classList.contains('active')) {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '';
+            }
         });
     });
     
@@ -272,199 +274,187 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ========== إدارة المشاريع ==========
-const projectDetails = {
-    project1: {
-        title: "بورتفوليو مصور احترافي",
-        status: "جاري العمل",
-        type: "بورتفوليو مصور فوتوغرافي",
-        date: "يناير 2025",
-        client: "مصور فوتوغرافي محترف",
-        description: "تصميم معرض صور تفاعلي لمصور فوتوغرافي محترف، مع إضاءة مميزة وتجربة مستخدم سلسة. يعرض المشروع مجموعة متنوعة من الأعمال الفوتوغرافية مع إمكانية التصفية حسب التصنيف.",
+let currentProjectIndex = 0;
+const projects = [
+    {
+        url: 'https://portfoliojo.github.io/test1/',
+        title: 'بورتفوليو مصور فوتوغرافي',
+        description: 'تصميم معرض صور تفاعلي لمصور فوتوغرافي محترف، مع إضاءة مميزة وتجربة مستخدم سلسة تعرض الأعمال الفنية بأفضل صورة.',
         features: [
-            "معرض صور تفاعلي",
-            "تصفية حسب التصنيف",
-            "عرض تفصيلي لكل صورة",
-            "تصميم متجاوب مع جميع الأجهزة",
-            "سرعة تحميل عالية",
-            "واجهة استخدام سهلة"
-        ],
-        technologies: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "Lightbox"],
-        link: "https://portfoliojo.github.io/test1/"
+            'معرض صور تفاعلي',
+            'تصفية حسب التصنيف',
+            'عرض تفصيلي لكل صورة',
+            'تصميم متجاوب مع جميع الأجهزة'
+        ]
     },
-    project2: {
-        title: "موقع شخصي متميز",
-        status: "جاري العمل",
-        type: "موقع شخصي احترافي",
-        date: "ديسمبر 2024",
-        client: "مصمم جرافيك محترف",
-        description: "تصميم أنيق وعصري لمحترف في مجال التصميم، مع عرض تفاعلي للأعمال وإنجازات المسيرة المهنية. يشمل الموقع سيرة ذاتية تفاعلية ومعرض للأعمال.",
+    {
+        url: 'https://portfoliojo.github.io/test7/',
+        title: 'موقع شخصي متميز',
+        description: 'تصميم أنيق وعصري لمحترف في مجال التصميم، مع عرض تفاعلي للأعمال وإنجازات المسيرة المهنية.',
         features: [
-            "عرض تفاعلي للأعمال",
-            "سيرة ذاتية تفاعلية",
-            "شهادات العملاء",
-            "مدونة مصغرة",
-            "نموذج تواصل مباشر",
-            "تصميم ثلاثي الأبعاد"
-        ],
-        technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Swiper.js"],
-        link: "https://portfoliojo.github.io/test7/"
+            'عرض تفاعلي للأعمال',
+            'سيرة ذاتية تفاعلية',
+            'شهادات العملاء',
+            'مدونة مصغرة'
+        ]
     },
-    project3: {
-        title: "بورتفوليو بسيط وأنيق",
-        status: "جاري العمل",
-        type: "بورتفوليو مطور ويب",
-        date: "نوفمبر 2024",
-        client: "مطور ويب محترف",
-        description: "تصميم نظيف ومركز لمطور ويب، يعرض المشاريع البرمجية والمهارات التقنية بشكل منظّم وسهل التصفح. يركز التصميم على المحتوى وسرعة الأداء.",
+    {
+        url: 'https://portfoliojo.github.io/test4/',
+        title: 'بورتفوليو مطور ويب',
+        description: 'تصميم نظيف ومركز لمطور ويب، يعرض المشاريع البرمجية والمهارات التقنية بشكل منظّم وسهل التصفح.',
         features: [
-            "عرض المشاريع البرمجية",
-            "مهارات تقنية تفاعلية",
-            "سجل الخبرات",
-            "شهادات ودورات",
-            "نموذج تواصل سريع",
-            "تحسين لمحركات البحث"
-        ],
-        technologies: ["HTML5", "CSS3", "JavaScript", "Chart.js", "Font Awesome"],
-        link: "https://portfoliojo.github.io/test4/"
+            'عرض المشاريع البرمجية',
+            'مهارات تقنية تفاعلية',
+            'سجل الخبرات',
+            'شهادات ودورات'
+        ]
     }
-};
+];
 
-// تهيئة بطاقات المشاريع
-function initializeProjectCards() {
-    const projectCards = document.querySelectorAll('.project-card');
-    const projectModal = document.getElementById('projectModal');
-    
-    // إضافة تأثيرات للبطاقات
-    projectCards.forEach((card, index) => {
-        card.style.transitionDelay = `${index * 100}ms`;
-        
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // تحسين iframes
-    const iframes = document.querySelectorAll('.preview-frame iframe');
-    iframes.forEach(iframe => {
-        iframe.addEventListener('load', function() {
+function initializeProjects() {
+    // تهيئة الإطار الأول
+    const projectFrame = document.getElementById('projectFrame');
+    if (projectFrame) {
+        projectFrame.addEventListener('load', function() {
             this.style.opacity = '1';
         });
         
-        iframe.style.opacity = '0';
-        iframe.style.transition = 'opacity 0.5s ease';
+        projectFrame.style.opacity = '0';
+        projectFrame.style.transition = 'opacity 0.5s ease';
+    }
+    
+    // تهيئة المشاريع المصغرة
+    const miniProjects = document.querySelectorAll('.mini-project');
+    miniProjects.forEach((project, index) => {
+        project.addEventListener('click', function() {
+            loadProject(projects[index].url, projects[index].title, index);
+        });
     });
 }
 
-// عرض تفاصيل المشروع
-function showProjectDetails(projectId) {
-    const project = projectDetails[projectId];
-    const modalBody = document.getElementById('modalBody');
+function loadProject(url, title, index) {
+    const projectFrame = document.getElementById('projectFrame');
+    const projectTitle = document.querySelector('.project-details h3');
+    const projectDescription = document.querySelector('.project-description');
+    const projectFeatures = document.querySelector('.project-features ul');
+    const projectCounter = document.querySelector('.project-counter');
+    const miniProjects = document.querySelectorAll('.mini-project');
     
-    if (!project || !modalBody) return;
+    if (!projectFrame) return;
     
-    const detailsHTML = `
-        <div class="project-details">
-            <h3>${project.title}</h3>
-            
-            <div class="project-meta">
-                <div class="meta-item">
-                    <i class="fas fa-circle"></i>
-                    <span>الحالة: ${project.status}</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-tag"></i>
-                    <span>النوع: ${project.type}</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-calendar"></i>
-                    <span>التاريخ: ${project.date}</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-user"></i>
-                    <span>العميل: ${project.client}</span>
-                </div>
-            </div>
-            
-            <div class="project-description">
-                <p>${project.description}</p>
-            </div>
-            
-            <div class="project-features">
-                <h4>المميزات الرئيسية</h4>
-                <ul>
-                    ${project.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
-                </ul>
-            </div>
-            
-            <div class="project-tech">
-                ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-            </div>
-            
-            <a href="${project.link}" target="_blank" class="project-btn">
-                <i class="fas fa-external-link-alt"></i>
-                زيارة الموقع المباشر
-            </a>
-        </div>
-    `;
+    // تحديث العداد
+    currentProjectIndex = index;
+    projectCounter.textContent = `${index + 1}/3`;
     
-    modalBody.innerHTML = detailsHTML;
-    document.getElementById('projectModal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-// إغلاق نافذة تفاصيل المشروع
-function closeProjectModal() {
-    document.getElementById('projectModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// إغلاق النافذة عند النقر خارج المحتوى
-document.getElementById('projectModal')?.addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeProjectModal();
+    // تحديث العنوان والوصف
+    if (projectTitle) projectTitle.textContent = title;
+    if (projectDescription) projectDescription.textContent = projects[index].description;
+    
+    // تحديث المميزات
+    if (projectFeatures) {
+        projectFeatures.innerHTML = projects[index].features.map(feature => 
+            `<li><i class="fas fa-check"></i> ${feature}</li>`
+        ).join('');
     }
-});
-
-// نافذة العرض الكامل
-function openFullscreen(url) {
-    const modalHTML = `
-        <div class="fullscreen-modal active" id="fullscreenModal">
-            <div class="fullscreen-header">
-                <h3>عرض الموقع</h3>
-                <button class="fullscreen-close" onclick="closeFullscreen()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <iframe src="${url}" class="fullscreen-frame" allowfullscreen></iframe>
-        </div>
-    `;
     
-    const modalContainer = document.createElement('div');
-    modalContainer.innerHTML = modalHTML;
-    document.body.appendChild(modalContainer);
+    // تحديث الإطار
+    projectFrame.style.opacity = '0';
+    setTimeout(() => {
+        projectFrame.src = url;
+        projectFrame.title = title;
+        
+        setTimeout(() => {
+            projectFrame.style.opacity = '1';
+        }, 500);
+    }, 300);
+    
+    // تحديث المشاريع المصغرة النشطة
+    miniProjects.forEach((project, i) => {
+        project.classList.remove('active');
+        if (i === index) {
+            project.classList.add('active');
+            project.style.borderColor = 'var(--accent-gold)';
+            project.style.transform = 'translateY(-5px)';
+            project.style.boxShadow = 'var(--shadow-medium)';
+        } else {
+            project.style.borderColor = 'rgba(139, 115, 85, 0.1)';
+            project.style.transform = 'translateY(0)';
+            project.style.boxShadow = 'none';
+        }
+    });
+}
+
+function nextProject() {
+    currentProjectIndex = (currentProjectIndex + 1) % projects.length;
+    const project = projects[currentProjectIndex];
+    loadProject(project.url, project.title, currentProjectIndex);
+}
+
+function prevProject() {
+    currentProjectIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
+    const project = projects[currentProjectIndex];
+    loadProject(project.url, project.title, currentProjectIndex);
+}
+
+function reloadProject() {
+    const projectFrame = document.getElementById('projectFrame');
+    if (projectFrame) {
+        projectFrame.style.opacity = '0';
+        setTimeout(() => {
+            projectFrame.src = projectFrame.src;
+            setTimeout(() => {
+                projectFrame.style.opacity = '1';
+            }, 500);
+        }, 300);
+    }
+}
+
+function openFullscreenProject() {
+    const projectFrame = document.getElementById('projectFrame');
+    const fullscreenModal = document.getElementById('fullscreenModal');
+    const fullscreenFrame = document.getElementById('fullscreenFrame');
+    const fullscreenTitle = document.getElementById('fullscreenTitle');
+    const projectTitle = document.querySelector('.project-details h3');
+    
+    if (!projectFrame || !fullscreenModal || !fullscreenFrame) return;
+    
+    fullscreenFrame.src = projectFrame.src;
+    fullscreenTitle.textContent = projectTitle ? projectTitle.textContent : 'عرض الموقع';
+    fullscreenModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeFullscreen() {
-    const modal = document.getElementById('fullscreenModal');
-    if (modal) {
-        modal.remove();
+    const fullscreenModal = document.getElementById('fullscreenModal');
+    const fullscreenFrame = document.getElementById('fullscreenFrame');
+    
+    if (fullscreenModal && fullscreenFrame) {
+        fullscreenModal.classList.remove('active');
+        fullscreenFrame.src = '';
+        document.body.style.overflow = 'auto';
     }
-    document.body.style.overflow = 'auto';
+}
+
+function copyProjectLink(url) {
+    navigator.clipboard.writeText(url).then(() => {
+        showNotification('تم نسخ الرابط بنجاح!', 'success');
+    }).catch(err => {
+        console.error('فشل نسخ الرابط:', err);
+        showNotification('فشل نسخ الرابط', 'error');
+    });
 }
 
 // إغلاق نافذة العرض الكامل بمفتاح ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        const modal = document.getElementById('fullscreenModal');
-        if (modal) {
-            closeFullscreen();
-        }
-        closeProjectModal();
+        closeFullscreen();
+    }
+});
+
+// إغلاق نافذة العرض الكامل عند النقر خارجها
+document.getElementById('fullscreenModal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeFullscreen();
     }
 });
 
@@ -488,6 +478,6 @@ function loadImages() {
 
 // تهيئة تحميل الصور
 window.addEventListener('load', function() {
-    setTimeout(initializeProjectCards, 1000);
+    setTimeout(initializeProjects, 1000);
     loadImages();
 });
