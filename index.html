@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,21 +26,24 @@
         <nav class="nav container">
             <a href="#hero" class="nav__logo">
                 <span class="nav__logo-text">Aseel</span>
-                <span class="nav__logo-sub">Visual Designer</span>
+                <span class="nav__logo-sub" data-i18n="nav.designer">Digital Designer</span>
             </a>
             
             <div class="nav__menu" id="navMenu">
                 <ul class="nav__list">
-                    <li><a href="#hero" class="nav__link active">Home</a></li>
-                    <li><a href="#about" class="nav__link">About</a></li>
-                    <li><a href="#projects" class="nav__link">Work</a></li>
-                    <li><a href="#services" class="nav__link">Services</a></li>
-                    <li><a href="#gallery" class="nav__link">Gallery</a></li>
-                    <li><a href="#contact" class="nav__link">Connect</a></li>
+                    <li><a href="#hero" class="nav__link active" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#about" class="nav__link" data-i18n="nav.about">About</a></li>
+                    <li><a href="#projects" class="nav__link" data-i18n="nav.work">Work</a></li>
+                    <li><a href="#services" class="nav__link" data-i18n="nav.services">Services</a></li>
+                    <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
                 </ul>
             </div>
             
             <div class="nav__actions">
+                <button class="language-toggle" id="languageToggle" aria-label="Toggle language">
+                    <span class="language-toggle__text" data-i18n="lang.en">EN</span>
+                    <span class="language-toggle__text hidden" data-i18n="lang.ar">AR</span>
+                </button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon theme-toggle__icon"></i>
                 </button>
@@ -54,52 +57,49 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero section--full" id="hero">
         <div class="hero__bg"></div>
         
         <div class="hero__content container">
             <div class="hero__text">
-                <div class="hero__label">Digital Artistry</div>
+                <div class="hero__label" data-i18n="hero.subtitle">Digital Artistry</div>
                 <h1 class="hero__title">
                     <span class="hero__title-line hero__title-line--1">Aseel</span>
-                    <span class="hero__title-line hero__title-line--2">Graphic & Digital Designer</span>
+                    <span class="hero__title-line hero__title-line--2" data-i18n="hero.title">Graphic & Digital Designer</span>
                 </h1>
                 
-                <p class="hero__subtitle">
+                <p class="hero__subtitle" data-i18n="hero.description">
                     Crafting visual identities that blend minimalism, modern aesthetics, and emotional storytelling.
                 </p>
                 
                 <div class="hero__actions">
                     <a href="#projects" class="btn btn--primary btn--large">
-                        <span class="btn__text">View Portfolio</span>
+                        <span class="btn__text" data-i18n="hero.viewPortfolio">View Portfolio</span>
                         <i class="btn__icon fas fa-arrow-down"></i>
                     </a>
                     <a href="#contact" class="btn btn--outline btn--large">
-                        <span class="btn__text">Start a Project</span>
+                        <span class="btn__text" data-i18n="hero.startProject">Start a Project</span>
                         <i class="btn__icon fas fa-star"></i>
                     </a>
                 </div>
             </div>
         </div>
         
-        <div class="hero__scroll">
-            <span class="hero__scroll-text">Explore</span>
+        <a href="#about" class="hero__scroll">
+            <span class="hero__scroll-text" data-i18n="hero.explore">Explore</span>
             <div class="hero__scroll-line"></div>
-        </div>
-        
-        <div class="hero__ornament hero__ornament--1"></div>
-        <div class="hero__ornament hero__ornament--2"></div>
+        </a>
     </section>
 
     <!-- About Section -->
-    <section class="section section--about" id="about">
+    <section class="section" id="about">
         <div class="container">
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">01</span>
-                    <span class="section__title-text">Creative Philosophy</span>
+                    <span class="section__title-text" data-i18n="about.title">Creative Philosophy</span>
                 </h2>
-                <p class="section__subtitle">Where art meets purpose in digital form</p>
+                <p class="section__subtitle" data-i18n="about.subtitle">Where art meets purpose in digital form</p>
             </div>
             
             <div class="about__content">
@@ -108,25 +108,25 @@
                         <div class="image-frame__inner">
                             <div class="image-placeholder">
                                 <i class="image-placeholder__icon fas fa-palette"></i>
-                                <span class="image-placeholder__text">Visual Storyteller</span>
+                                <span class="image-placeholder__text" data-i18n="about.imageText">Visual Storyteller</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="about__text">
-                    <h3 class="about__heading">Design with Intention</h3>
+                    <h3 class="about__heading" data-i18n="about.heading">Design with Intention</h3>
                     
                     <div class="about__description">
-                        <p>I specialize in transforming abstract concepts into compelling visual experiences that resonate with audiences. My approach combines artistic sensibility with strategic thinking to create designs that not only look beautiful but also communicate effectively.</p>
+                        <p data-i18n="about.description1">I specialize in transforming abstract concepts into compelling visual experiences that resonate with audiences. My approach combines artistic sensibility with strategic thinking.</p>
                         
-                        <p>With over 5 years of experience in digital design, I've collaborated with brands worldwide to build distinctive visual identities and memorable user experiences that stand the test of time.</p>
+                        <p data-i18n="about.description2">With over 5 years of experience in digital design, I've collaborated with brands worldwide to build distinctive visual identities and memorable user experiences.</p>
                     </div>
                     
                     <div class="about__signature">
                         <div class="signature">
                             <span class="signature__name">Aseel</span>
-                            <span class="signature__title">Digital Designer</span>
+                            <span class="signature__title" data-i18n="about.designerTitle">Digital Designer</span>
                         </div>
                     </div>
                 </div>
@@ -140,32 +140,32 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">02</span>
-                    <span class="section__title-text">Featured Work</span>
+                    <span class="section__title-text" data-i18n="projects.title">Featured Work</span>
                 </h2>
-                <p class="section__subtitle">Selected projects showcasing design excellence</p>
+                <p class="section__subtitle" data-i18n="projects.subtitle">Selected projects showcasing design excellence</p>
             </div>
             
             <div class="projects__grid">
                 <article class="project-card" data-project="1">
                     <div class="project-card__image project-card__image--1">
                         <div class="project-card__overlay">
-                            <span class="project-card__category">Brand Identity</span>
+                            <span class="project-card__category" data-i18n="projects.project1.category">Brand Identity</span>
                             <span class="project-card__year">2024</span>
                         </div>
                     </div>
                     
                     <div class="project-card__content">
-                        <h3 class="project-card__title">Luxury Fashion House</h3>
-                        <p class="project-card__description">Complete visual identity for a high-end fashion brand blending heritage with modernity</p>
+                        <h3 class="project-card__title" data-i18n="projects.project1.title">Luxury Fashion House</h3>
+                        <p class="project-card__description" data-i18n="projects.project1.description">Complete visual identity for a high-end fashion brand blending heritage with modernity</p>
                         
                         <div class="project-card__tags">
-                            <span class="tag">Logo Design</span>
-                            <span class="tag">Visual Identity</span>
-                            <span class="tag">Typography</span>
+                            <span class="tag" data-i18n="projects.tags.logo">Logo Design</span>
+                            <span class="tag" data-i18n="projects.tags.identity">Visual Identity</span>
+                            <span class="tag" data-i18n="projects.tags.typography">Typography</span>
                         </div>
                         
                         <button class="project-card__link project-view-btn" data-project="1">
-                            <span>View Case Study</span>
+                            <span data-i18n="projects.viewCase">View Case Study</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -174,23 +174,23 @@
                 <article class="project-card project-card--featured" data-project="2">
                     <div class="project-card__image project-card__image--2">
                         <div class="project-card__overlay">
-                            <span class="project-card__category">Web Design</span>
+                            <span class="project-card__category" data-i18n="projects.project2.category">Web Design</span>
                             <span class="project-card__year">2024</span>
                         </div>
                     </div>
                     
                     <div class="project-card__content">
-                        <h3 class="project-card__title">Interactive Art Gallery</h3>
-                        <p class="project-card__description">Digital platform for art exhibition with immersive user experience</p>
+                        <h3 class="project-card__title" data-i18n="projects.project2.title">Interactive Art Gallery</h3>
+                        <p class="project-card__description" data-i18n="projects.project2.description">Digital platform for art exhibition with immersive user experience</p>
                         
                         <div class="project-card__tags">
-                            <span class="tag">UI/UX Design</span>
-                            <span class="tag">Interaction</span>
-                            <span class="tag">Digital Art</span>
+                            <span class="tag" data-i18n="projects.tags.uiux">UI/UX Design</span>
+                            <span class="tag" data-i18n="projects.tags.interaction">Interaction</span>
+                            <span class="tag" data-i18n="projects.tags.digitalArt">Digital Art</span>
                         </div>
                         
                         <button class="project-card__link project-view-btn" data-project="2">
-                            <span>View Case Study</span>
+                            <span data-i18n="projects.viewCase">View Case Study</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -199,34 +199,27 @@
                 <article class="project-card" data-project="3">
                     <div class="project-card__image project-card__image--3">
                         <div class="project-card__overlay">
-                            <span class="project-card__category">Advertising</span>
+                            <span class="project-card__category" data-i18n="projects.project3.category">Advertising</span>
                             <span class="project-card__year">2023</span>
                         </div>
                     </div>
                     
                     <div class="project-card__content">
-                        <h3 class="project-card__title">Premium Beverage Campaign</h3>
-                        <p class="project-card__description">Comprehensive advertising campaign with professional photography</p>
+                        <h3 class="project-card__title" data-i18n="projects.project3.title">Premium Beverage Campaign</h3>
+                        <p class="project-card__description" data-i18n="projects.project3.description">Comprehensive advertising campaign with professional photography</p>
                         
                         <div class="project-card__tags">
-                            <span class="tag">Advertising</span>
-                            <span class="tag">Photography</span>
-                            <span class="tag">Marketing</span>
+                            <span class="tag" data-i18n="projects.tags.advertising">Advertising</span>
+                            <span class="tag" data-i18n="projects.tags.photography">Photography</span>
+                            <span class="tag" data-i18n="projects.tags.marketing">Marketing</span>
                         </div>
                         
                         <button class="project-card__link project-view-btn" data-project="3">
-                            <span>View Case Study</span>
+                            <span data-i18n="projects.viewCase">View Case Study</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </article>
-            </div>
-            
-            <div class="section__footer">
-                <a href="#" class="btn btn--outline">
-                    <span class="btn__text">View All Projects</span>
-                    <i class="btn__icon fas fa-archive"></i>
-                </a>
             </div>
         </div>
     </section>
@@ -237,9 +230,9 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">03</span>
-                    <span class="section__title-text">Design Services</span>
+                    <span class="section__title-text" data-i18n="services.title">Design Services</span>
                 </h2>
-                <p class="section__subtitle">Transforming visions into visual realities</p>
+                <p class="section__subtitle" data-i18n="services.subtitle">Transforming visions into visual realities</p>
             </div>
             
             <div class="services__grid">
@@ -248,20 +241,13 @@
                         <div class="service-card__icon">
                             <i class="fas fa-paint-brush"></i>
                         </div>
-                        <h3 class="service-card__title">Web Design</h3>
+                        <h3 class="service-card__title" data-i18n="services.service1.title">Web Design</h3>
                     </div>
                     
                     <div class="service-card__body">
-                        <p class="service-card__description">
+                        <p class="service-card__description" data-i18n="services.service1.description">
                             Contemporary website designs that marry aesthetics with functionality, focusing on user experience and performance.
                         </p>
-                        
-                        <ul class="service-card__features">
-                            <li>UI/UX Design</li>
-                            <li>Responsive Development</li>
-                            <li>Performance Optimization</li>
-                            <li>SEO Integration</li>
-                        </ul>
                     </div>
                 </div>
                 
@@ -270,20 +256,13 @@
                         <div class="service-card__icon">
                             <i class="fas fa-palette"></i>
                         </div>
-                        <h3 class="service-card__title">Brand Identity</h3>
+                        <h3 class="service-card__title" data-i18n="services.service2.title">Brand Identity</h3>
                     </div>
                     
                     <div class="service-card__body">
-                        <p class="service-card__description">
+                        <p class="service-card__description" data-i18n="services.service2.description">
                             Complete visual identity systems that express brand values and create memorable impressions.
                         </p>
-                        
-                        <ul class="service-card__features">
-                            <li>Logo Design</li>
-                            <li>Brand Guidelines</li>
-                            <li>Color Systems</li>
-                            <li>Typography</li>
-                        </ul>
                     </div>
                 </div>
                 
@@ -292,83 +271,13 @@
                         <div class="service-card__icon">
                             <i class="fas fa-camera-retro"></i>
                         </div>
-                        <h3 class="service-card__title">Digital Art</h3>
+                        <h3 class="service-card__title" data-i18n="services.service3.title">Digital Art</h3>
                     </div>
                     
                     <div class="service-card__body">
-                        <p class="service-card__description">
+                        <p class="service-card__description" data-i18n="services.service3.description">
                             Engaging visual content for social media that enhances brand presence and follows modern trends.
                         </p>
-                        
-                        <ul class="service-card__features">
-                            <li>Social Media Graphics</li>
-                            <li>Short Videos</li>
-                            <li>Story Design</li>
-                            <li>Custom Advertising</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="section section--gallery" id="gallery">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">
-                    <span class="section__title-number">04</span>
-                    <span class="section__title-text">Visual Gallery</span>
-                </h2>
-                <p class="section__subtitle">A curated collection of artistic expressions</p>
-            </div>
-            
-            <div class="gallery__grid">
-                <div class="gallery-item">
-                    <div class="gallery-item__image gallery-item__image--1">
-                        <div class="gallery-item__overlay">
-                            <span class="gallery-item__title">Abstract Design</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-item__image gallery-item__image--2">
-                        <div class="gallery-item__overlay">
-                            <span class="gallery-item__title">Digital Print</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-item__image gallery-item__image--3">
-                        <div class="gallery-item__overlay">
-                            <span class="gallery-item__title">Calligraphy Art</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-item__image gallery-item__image--4">
-                        <div class="gallery-item__overlay">
-                            <span class="gallery-item__title">Digital Coloring</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-item__image gallery-item__image--5">
-                        <div class="gallery-item__overlay">
-                            <span class="gallery-item__title">Geometric Design</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-item__image gallery-item__image--6">
-                        <div class="gallery-item__overlay">
-                            <span class="gallery-item__title">Cinematic Art</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -380,72 +289,96 @@
         <div class="container">
             <div class="section__header">
                 <h2 class="section__title">
-                    <span class="section__title-number">05</span>
-                    <span class="section__title-text">Let's Connect</span>
+                    <span class="section__title-number">04</span>
+                    <span class="section__title-text" data-i18n="contact.title">Let's Connect</span>
                 </h2>
-                <p class="section__subtitle">Ready to bring your vision to life?</p>
+                <p class="section__subtitle" data-i18n="contact.subtitle">Ready to bring your vision to life?</p>
             </div>
             
-            <div class="contact__content">
-                <div class="contact__intro">
-                    <h3 class="contact__heading">Let's create something remarkable together</h3>
-                    <p class="contact__description">
-                        Have a project in mind? I'd love to hear about it. Let's discuss how we can transform your vision into a tangible reality.
+            <div class="contact__grid">
+                <div class="contact__info">
+                    <h3 class="contact__heading" data-i18n="contact.heading">Get in Touch</h3>
+                    <p class="contact__description" data-i18n="contact.description">
+                        Have a project in mind? I'd love to hear about it. Let's discuss how we can transform your vision into reality.
                     </p>
+                    
+                    <div class="contact__methods">
+                        <div class="contact-method">
+                            <div class="contact-method__icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-method__content">
+                                <h4 data-i18n="contact.emailTitle">Email</h4>
+                                <a href="mailto:hello@aseel.design" class="contact-method__link">hello@aseel.design</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-method__icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-method__content">
+                                <h4 data-i18n="contact.phoneTitle">Phone</h4>
+                                <a href="tel:+966555555555" class="contact-method__link">+966 55 555 5555</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-method__icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-method__content">
+                                <h4 data-i18n="contact.locationTitle">Location</h4>
+                                <span class="contact-method__text" data-i18n="contact.location">Available Worldwide</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="contact__details">
-                    <div class="contact-detail">
-                        <div class="contact-detail__icon">
-                            <i class="fas fa-envelope"></i>
+                <div class="contact__form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder=" ">
+                            <label for="name" data-i18n="contact.form.name">Your Name</label>
                         </div>
-                        <div class="contact-detail__content">
-                            <h4 class="contact-detail__title">Email</h4>
-                            <a href="mailto:hello@aseel.design" class="contact-detail__value">hello@aseel.design</a>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder=" ">
+                            <label for="email" data-i18n="contact.form.email">Email Address</label>
                         </div>
-                    </div>
-                    
-                    <div class="contact-detail">
-                        <div class="contact-detail__icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+                            <label for="message" data-i18n="contact.form.message">Project Details</label>
                         </div>
-                        <div class="contact-detail__content">
-                            <h4 class="contact-detail__title">Location</h4>
-                            <span class="contact-detail__value">Available Worldwide</span>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-detail">
-                        <div class="contact-detail__icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-detail__content">
-                            <h4 class="contact-detail__title">Availability</h4>
-                            <span class="contact-detail__value">Taking new projects</span>
-                        </div>
-                    </div>
+                        
+                        <button type="submit" class="btn btn--primary btn--full">
+                            <span class="btn__text" data-i18n="contact.form.submit">Send Message</span>
+                            <i class="btn__icon fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
-                
-                <div class="contact__social">
-                    <h4 class="contact__social-title">Follow my journey</h4>
-                    <div class="social-links">
-                        <a href="https://dribbble.com" class="social-link" target="_blank" aria-label="Dribbble">
-                            <i class="fab fa-dribbble"></i>
-                            <span class="social-link__text">Dribbble</span>
-                        </a>
-                        <a href="https://behance.net" class="social-link" target="_blank" aria-label="Behance">
-                            <i class="fab fa-behance"></i>
-                            <span class="social-link__text">Behance</span>
-                        </a>
-                        <a href="https://instagram.com" class="social-link" target="_blank" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                            <span class="social-link__text">Instagram</span>
-                        </a>
-                        <a href="https://linkedin.com" class="social-link" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                            <span class="social-link__text">LinkedIn</span>
-                        </a>
-                    </div>
+            </div>
+            
+            <div class="contact__social">
+                <h4 class="contact__social-title" data-i18n="contact.socialTitle">Follow My Work</h4>
+                <div class="social-links">
+                    <a href="https://dribbble.com" class="social-link" target="_blank" aria-label="Dribbble">
+                        <i class="fab fa-dribbble"></i>
+                        <span class="social-link__text">Dribbble</span>
+                    </a>
+                    <a href="https://behance.net" class="social-link" target="_blank" aria-label="Behance">
+                        <i class="fab fa-behance"></i>
+                        <span class="social-link__text">Behance</span>
+                    </a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span class="social-link__text">LinkedIn</span>
+                    </a>
+                    <a href="https://instagram.com" class="social-link" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span class="social-link__text">Instagram</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -454,48 +387,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer__main">
-                <div class="footer__brand">
-                    <a href="#hero" class="footer__logo">
-                        <span class="footer__logo-text">Aseel</span>
-                        <span class="footer__logo-sub">Visual Designer</span>
-                    </a>
-                    <p class="footer__tagline">Creating digital experiences with purpose and beauty</p>
-                </div>
-                
-                <div class="footer__nav">
-                    <nav class="footer__nav-menu">
-                        <a href="#about" class="footer__nav-link">About</a>
-                        <a href="#projects" class="footer__nav-link">Work</a>
-                        <a href="#services" class="footer__nav-link">Services</a>
-                        <a href="#contact" class="footer__nav-link">Connect</a>
-                    </nav>
-                </div>
-                
-                <div class="footer__newsletter">
-                    <h4 class="footer__newsletter-title">Stay inspired</h4>
-                    <p class="footer__newsletter-text">Occasional insights on design and creativity</p>
-                    <a href="mailto:hello@aseel.design?subject=Subscribe%20to%20newsletter" class="footer__newsletter-link">
-                        <span>Subscribe via email</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="footer__bottom">
-                <div class="footer__copyright">
-                    <p>© <span id="currentYear"></span> Aseel. All rights reserved.</p>
-                    <p class="footer__copyright-note">Crafted with intention</p>
-                </div>
-                
-                <div class="footer__legal">
-                    <a href="#" class="footer__legal-link">Privacy</a>
-                    <a href="#" class="footer__legal-link">Terms</a>
-                </div>
+            <div class="footer__content">
+                <p class="footer__copyright">© <span id="currentYear"></span> Aseel. <span data-i18n="footer.rights">All rights reserved</span>.</p>
             </div>
         </div>
-        
-        <div class="footer__line"></div>
     </footer>
 
     <!-- Project Modal -->
@@ -517,39 +412,22 @@
                 
                 <div class="modal__info">
                     <div class="modal__section">
-                        <h3>Project Overview</h3>
+                        <h3 data-i18n="modal.overview">Project Overview</h3>
                         <p id="modalDescription">Complete visual identity for a high-end fashion brand blending heritage with modernity.</p>
                     </div>
                     
                     <div class="modal__section">
-                        <h3>Services Provided</h3>
-                        <div class="modal__tags" id="modalTags">
-                            <span class="tag">Logo Design</span>
-                            <span class="tag">Visual Identity</span>
-                        </div>
+                        <h3 data-i18n="modal.services">Services Provided</h3>
+                        <div class="modal__tags" id="modalTags"></div>
                     </div>
                     
-                    <div class="modal__section">
-                        <h3>Challenge & Solution</h3>
-                        <p>The client needed a brand identity that reflected their heritage while appealing to a modern audience. The solution involved creating a timeless logo system with contemporary applications.</p>
-                    </div>
-                    
-                    <div class="modal__section">
-                        <h3>Results</h3>
-                        <ul class="modal__results">
-                            <li>Increased brand recognition by 40%</li>
-                            <li>Successful launch across 15 countries</li>
-                            <li>Featured in Design Week magazine</li>
-                        </ul>
+                    <div class="modal__footer">
+                        <a href="#contact" class="btn btn--primary">
+                            <span data-i18n="modal.startProject">Start a Similar Project</span>
+                            <i class="fas fa-star"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="modal__footer">
-                <a href="#contact" class="btn btn--primary">
-                    <span>Start a Similar Project</span>
-                    <i class="fas fa-star"></i>
-                </a>
             </div>
         </div>
     </div>
