@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all modules
     initNavigation();
     initThemeSwitcher();
-    initLanguageSwitcher();
     initAnimations();
     initCurrentYear();
     initScrollEffects();
@@ -122,84 +121,6 @@ function initThemeSwitcher() {
         } else {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
-        }
-    }
-}
-
-// ===========================================
-// Language Switcher
-// ===========================================
-
-function initLanguageSwitcher() {
-    const languageToggle = document.getElementById('languageToggle');
-    
-    // Get saved language or default to Arabic
-    const savedLanguage = localStorage.getItem('aseel-language') || 'ar';
-    setLanguage(savedLanguage);
-    
-    // Toggle language
-    languageToggle.addEventListener('click', function() {
-        const currentLanguage = document.documentElement.getAttribute('lang');
-        const newLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
-        
-        setLanguage(newLanguage);
-        localStorage.setItem('aseel-language', newLanguage);
-        
-        // Add animation
-        this.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-            this.style.transform = 'scale(1)';
-        }, 200);
-    });
-    
-    function setLanguage(lang) {
-        // Update HTML lang and dir attributes
-        document.documentElement.setAttribute('lang', lang);
-        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-        
-        // Show/hide language-specific elements
-        const arElements = document.querySelectorAll('[data-lang="ar"]');
-        const enElements = document.querySelectorAll('[data-lang="en"]');
-        
-        if (lang === 'ar') {
-            arElements.forEach(el => el.style.display = '');
-            enElements.forEach(el => el.style.display = 'none');
-            
-            // Update toggle button text
-            document.querySelectorAll('.language-toggle__text[data-lang="ar"]').forEach(el => {
-                el.textContent = 'EN';
-            });
-            document.querySelectorAll('.language-toggle__text[data-lang="en"]').forEach(el => {
-                el.textContent = 'AR';
-            });
-        } else {
-            arElements.forEach(el => el.style.display = 'none');
-            enElements.forEach(el => el.style.display = '');
-            
-            // Update toggle button text
-            document.querySelectorAll('.language-toggle__text[data-lang="ar"]').forEach(el => {
-                el.textContent = 'AR';
-            });
-            document.querySelectorAll('.language-toggle__text[data-lang="en"]').forEach(el => {
-                el.textContent = 'EN';
-            });
-        }
-        
-        // Update navigation menu position based on direction
-        const navMenu = document.getElementById('navMenu');
-        if (navMenu.classList.contains('active')) {
-            if (lang === 'ar') {
-                navMenu.style.right = '-100%';
-                navMenu.style.left = 'auto';
-            } else {
-                navMenu.style.left = '-100%';
-                navMenu.style.right = 'auto';
-            }
-        }
-        
-        // Refresh animations
-        if (typeof ScrollTrigger !== 'undefined') {
-            ScrollTrigger.refresh();
         }
     }
 }
@@ -447,20 +368,11 @@ function initHoverEffects() {
             
             const link = this.querySelector('.project-card__link');
             if (link) {
-                const currentLang = document.documentElement.getAttribute('lang');
-                if (currentLang === 'ar') {
-                    gsap.to(link.querySelector('i'), {
-                        x: -5,
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
-                } else {
-                    gsap.to(link.querySelector('i'), {
-                        x: 5,
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
-                }
+                gsap.to(link, {
+                    gap: '15px',
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
             }
         });
         
@@ -473,8 +385,8 @@ function initHoverEffects() {
             
             const link = this.querySelector('.project-card__link');
             if (link) {
-                gsap.to(link.querySelector('i'), {
-                    x: 0,
+                gsap.to(link, {
+                    gap: '8px',
                     duration: 0.3,
                     ease: 'power2.in'
                 });
@@ -601,45 +513,27 @@ function initProjectModal() {
     // Project data
     const projects = {
         1: {
-            category: { ar: 'هوية بصرية', en: 'Brand Identity' },
-            title: { ar: 'دار أزياء فاخرة', en: 'Luxury Fashion House' },
+            category: 'Brand Identity',
+            title: 'Luxury Fashion House',
             year: '2024',
-            description: {
-                ar: 'هوية بصرية متكاملة لدار أزياء تهدف إلى الجمع بين التراث والحداثة. تضمن المشروع إنشاء نظام علامة تجارية شامل يعمل عبر نقاط اللمس الرقمية والمادية.',
-                en: 'Complete visual identity for a high-end fashion brand blending heritage with modernity. The project involved creating a comprehensive brand system that works across digital and physical touchpoints.'
-            },
-            tags: {
-                ar: ['تصميم الشعار', 'الهوية البصرية', 'الطباعة', 'دليل العلامة'],
-                en: ['Logo Design', 'Visual Identity', 'Typography', 'Brand Guidelines']
-            },
+            description: 'Complete visual identity for a high-end fashion brand blending heritage with modernity. The project involved creating a comprehensive brand system that works across digital and physical touchpoints.',
+            tags: ['Logo Design', 'Visual Identity', 'Typography', 'Brand Guidelines'],
             imageClass: 'project-card__image--1'
         },
         2: {
-            category: { ar: 'تصميم ويب', en: 'Web Design' },
-            title: { ar: 'معرض فني تفاعلي', en: 'Interactive Art Gallery' },
+            category: 'Web Design',
+            title: 'Interactive Art Gallery',
             year: '2024',
-            description: {
-                ar: 'منصة رقمية لعرض الأعمال الفنية بتجربة مستخدم غامرة. يركز التصميم على إنشاء رحلة سلسة عبر المعارض الافتراضية مع الحفاظ على السلامة الفنية لكل قطعة.',
-                en: 'Digital platform for art exhibition with immersive user experience. The design focuses on creating a seamless journey through virtual exhibitions while maintaining the artistic integrity of each piece.'
-            },
-            tags: {
-                ar: ['تصميم UI/UX', 'التفاعل', 'الفن الرقمي', 'تطوير الويب'],
-                en: ['UI/UX Design', 'Interaction', 'Digital Art', 'Web Development']
-            },
+            description: 'Digital platform for art exhibition with immersive user experience. The design focuses on creating a seamless journey through virtual exhibitions while maintaining the artistic integrity of each piece.',
+            tags: ['UI/UX Design', 'Interaction', 'Digital Art', 'Web Development'],
             imageClass: 'project-card__image--2'
         },
         3: {
-            category: { ar: 'إعلان', en: 'Advertising' },
-            title: { ar: 'حملة مشروب فاخر', en: 'Premium Beverage Campaign' },
+            category: 'Advertising',
+            title: 'Premium Beverage Campaign',
             year: '2023',
-            description: {
-                ar: 'حملة إعلانية شاملة مع تصوير احترافي وهوية بصرية متماسكة. نجحت الحملة في ترسيخ العلامة التجارية كخيار نمط حياة فاخر من خلال سرد القصص البصرية الاستراتيجية.',
-                en: 'Comprehensive advertising campaign with professional photography. The campaign successfully positioned the brand as a premium lifestyle choice through strategic visual storytelling.'
-            },
-            tags: {
-                ar: ['الإعلان', 'التصوير', 'التسويق', 'إستراتيجية الحملة'],
-                en: ['Advertising', 'Photography', 'Marketing', 'Campaign Strategy']
-            },
+            description: 'Comprehensive advertising campaign with professional photography. The campaign successfully positioned the brand as a premium lifestyle choice through strategic visual storytelling.',
+            tags: ['Advertising', 'Photography', 'Marketing', 'Campaign Strategy'],
             imageClass: 'project-card__image--3'
         }
     };
@@ -665,39 +559,22 @@ function initProjectModal() {
     
     function openProjectModal(projectId) {
         const project = projects[projectId];
-        const currentLang = document.documentElement.getAttribute('lang');
         
         if (!project) return;
         
-        // Update modal content based on current language
-        document.getElementById('modalCategory').textContent = project.category[currentLang];
-        document.getElementById('modalTitle').textContent = project.title[currentLang];
+        // Update modal content
+        document.getElementById('modalCategory').textContent = project.category;
+        document.getElementById('modalTitle').textContent = project.title;
         document.getElementById('modalYear').textContent = project.year;
-        
-        // Update description
-        if (currentLang === 'ar') {
-            document.getElementById('modalDescription').textContent = project.description.ar;
-            document.getElementById('modalDescription').style.display = '';
-            document.getElementById('modalDescriptionEn').style.display = 'none';
-        } else {
-            document.getElementById('modalDescriptionEn').textContent = project.description.en;
-            document.getElementById('modalDescriptionEn').style.display = '';
-            document.getElementById('modalDescription').style.display = 'none';
-        }
+        document.getElementById('modalDescription').textContent = project.description;
         
         // Update tags
         const tagsContainer = document.getElementById('modalTags');
         tagsContainer.innerHTML = '';
-        const tags = project.tags[currentLang];
-        tags.forEach(tag => {
+        project.tags.forEach(tag => {
             const tagElement = document.createElement('span');
             tagElement.className = 'tag';
             tagElement.textContent = tag;
-            if (currentLang === 'ar') {
-                tagElement.setAttribute('data-lang', 'ar');
-            } else {
-                tagElement.setAttribute('data-lang', 'en');
-            }
             tagsContainer.appendChild(tagElement);
         });
         
@@ -798,23 +675,3 @@ function initScrollAnimations() {
 
 // Initialize scroll animations
 initScrollAnimations();
-
-// Handle language change in modal
-document.documentElement.addEventListener('langchange', function() {
-    // This event is triggered when language changes
-    const modal = document.getElementById('projectModal');
-    if (modal.classList.contains('active')) {
-        // Close and reopen modal to update language
-        const activeProject = document.querySelector('.project-view-btn:hover')?.getAttribute('data-project') || '1';
-        closeModal();
-        setTimeout(() => openProjectModal(activeProject), 300);
-    }
-});
-
-// Custom event for language change
-const originalSetLanguage = window.setLanguage;
-window.setLanguage = function(lang) {
-    const event = new CustomEvent('langchange', { detail: { language: lang } });
-    document.documentElement.dispatchEvent(event);
-    return originalSetLanguage ? originalSetLanguage(lang) : null;
-};
