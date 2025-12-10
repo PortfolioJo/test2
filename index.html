@@ -3,400 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أحمد | مصمم جرافيك كلاسيكي</title>
+    <title>Portfolio 2025</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 </head>
 <body>
-    <!-- Loader كلاسيكي -->
-    <div class="loader">
-        <div class="marble-loader">
-            <div class="marble-text">A</div>
-            <div class="marble-line"></div>
-        </div>
-    </div>
 
-    <!-- Header أنيق -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <span class="logo-text">A</span>
-                    <div class="logo-accent"></div>
-                </div>
-                
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li><a href="#home" class="nav-link active">الرئيسية</a></li>
-                        <li><a href="#about" class="nav-link">تعريف</a></li>
-                        <li><a href="#portfolio" class="nav-link">الأعمال</a></li>
-                        <li><a href="#services" class="nav-link">الخدمات</a></li>
-                        <li><a href="#contact" class="nav-link">اتصل</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="header-accent">
-                    <div class="accent-line"></div>
-                </div>
-            </div>
-        </div>
+    <!-- Navigation -->
+    <header class="nav">
+        <h2 class="logo">My Portfolio</h2>
+        <nav>
+            <a href="#about">عنّي</a>
+            <a href="#services">الخدمات</a>
+            <a href="#work">الأعمال</a>
+            <a href="#contact">تواصل</a>
+        </nav>
     </header>
 
-    <!-- Hero Section مع تمثال كبير -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <!-- خلفية التمثال -->
-            <div class="statue-background" style="background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
-            <div class="overlay"></div>
-        </div>
-        
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text" data-aos="fade-up" data-aos-duration="1500">
-                    <div class="hero-badge">
-                        <span>مصمم جرافيك كلاسيكي</span>
-                    </div>
-                    
-                    <h1 class="hero-title">
-                        <span class="title-line">أحمد</span>
-                        <span class="title-line">المصمم</span>
-                    </h1>
-                    
-                    <p class="hero-subtitle">
-                        فن كلاسيكي في عالم رقمي
-                    </p>
-                    
-                    <p class="hero-description">
-                        أصمم هويات بصرية تجمع بين أناقة الفن الكلاسيكي وحداثة العصر الرقمي، 
-                        لأخلق تجارب بصرية خالدة.
-                    </p>
-                    
-                    <div class="hero-buttons">
-                        <a href="#portfolio" class="btn-primary">
-                            <span>استكشف أعمالي</span>
-                            <div class="btn-line"></div>
-                        </a>
-                        <a href="#contact" class="btn-outline">
-                            <span>تواصل معي</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hero-image" data-aos="fade-left" data-aos-duration="2000">
-                    <div class="statue-frame">
-                        <div class="frame-content">
-                            <div class="floating-element">
-                                <i class="fas fa-palette"></i>
-                            </div>
-                            <div class="floating-element element-2">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="scroll-hint">
-            <div class="hint-line"></div>
-            <span>مرر</span>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content fade-section">
+            <h1>تصميم رقمي راقي<br>يُبرز هويتك.</h1>
+            <p>أصمم تجارب رقمية حديثة — مواقع، هويات، محتوى بصري — بأسلوب بسيط ورافع.</p>
+            <a href="#work" class="btn">شاهد أعمالي</a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="about-background">
-            <div class="column-bg"></div>
-        </div>
-        
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">تعريف بالفنان</h2>
-                <div class="section-line"></div>
-                <p class="section-subtitle">قصة شغفي بالفن الكلاسيكي</p>
+    <!-- ABOUT -->
+    <section id="about" class="about section fade-section">
+        <h2 class="section-title">عنّي</h2>
+        <p class="section-text">
+            مصمم ومطور واجهات ويب أعمل على إنشاء تجارب رقمية حديثة بأسلوب بسيط وراقي، 
+            مع التركيز على الجمالية، السرعة، والتجربة الممتازة للمستخدم.
+        </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services section">
+        <h2 class="section-title fade-section">الخدمات</h2>
+        <div class="service-grid">
+            <div class="service-card fade-section">
+                <h3>تصميم مواقع</h3>
+                <p>مواقع سريعة، عصرية، متجاوبة بالكامل.</p>
             </div>
-            
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right" data-aos-duration="1000">
-                    <h3>مرحبًا، أنا أحمد</h3>
-                    <p class="about-role">مصمم جرافيكي متخصص في الهويات البصرية الكلاسيكية</p>
-                    
-                    <div class="about-story">
-                        <p>
-                            كمصمم جرافيكي، أجد إلهامي في الفن الكلاسيكي والتماثيل الإغريقية. 
-                            أؤمن بأن الجمال الخالد لا يتغير، بل يكتسب أبعادًا جديدة مع كل عصر.
-                        </p>
-                        <p>
-                            عملي يمزج بين الدقة الكلاسيكية والابتكار الحديث، لأخلق تصاميم تحمل 
-                            روح التراث وجمال الحداثة في آن واحد.
-                        </p>
-                    </div>
-                    
-                    <div class="about-signature">
-                        <div class="signature-name">أحمد</div>
-                        <div class="signature-line"></div>
-                    </div>
-                </div>
-                
-                <div class="about-stats" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number" data-count="120">0</div>
-                            <div class="stat-label">مشروع مكتمل</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-count="7">0</div>
-                            <div class="stat-label">سنوات خبرة</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-count="50">0</div>
-                            <div class="stat-label">عميل سعيد</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-count="15">0</div>
-                            <div class="stat-label">جائزة فنية</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="service-card fade-section">
+                <h3>تصميم هوية</h3>
+                <p>لوغو، ألوان، دليل استخدام، لمسة فنية راقية.</p>
+            </div>
+            <div class="service-card fade-section">
+                <h3>إنتاج محتوى بصري</h3>
+                <p>صور، ريلز، فيديوهات دعائية احترافية.</p>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="portfolio-background">
-            <div class="statue-bg"></div>
-            <div class="overlay-dark"></div>
-        </div>
-        
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">معرض الأعمال</h2>
-                <div class="section-line"></div>
-                <p class="section-subtitle">أبرز مشاريعي الفنية</p>
-            </div>
-            
-            <div class="portfolio-grid">
-                <!-- مشروع 1 -->
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-duration="800">
-                    <div class="item-image">
-                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تصميم جرافيك">
-                        <div class="item-overlay">
-                            <div class="overlay-content">
-                                <h3>سلسلة كلاسيكيات</h3>
-                                <p>تصميم جرافيك - 2023</p>
-                                <button class="view-project">عرض التفاصيل</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-info">
-                        <h3>سلسلة كلاسيكيات</h3>
-                        <p>تصميم جرافيك - 2023</p>
-                    </div>
-                </div>
-                
-                <!-- مشروع 2 -->
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
-                    <div class="item-image">
-                        <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="هوية بصرية">
-                        <div class="item-overlay">
-                            <div class="overlay-content">
-                                <h3>هوية فندق فاخر</h3>
-                                <p>هوية بصرية - 2024</p>
-                                <button class="view-project">عرض التفاصيل</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-info">
-                        <h3>هوية فندق فاخر</h3>
-                        <p>هوية بصرية - 2024</p>
-                    </div>
-                </div>
-                
-                <!-- مشروع 3 -->
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
-                    <div class="item-image">
-                        <img src="https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="فن رقمي">
-                        <div class="item-overlay">
-                            <div class="overlay-content">
-                                <h3>لوحة رقمية</h3>
-                                <p>فن رقمي - 2024</p>
-                                <button class="view-project">عرض التفاصيل</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-info">
-                        <h3>لوحة رقمية</h3>
-                        <p>فن رقمي - 2024</p>
-                    </div>
-                </div>
-                
-                <!-- مشروع 4 -->
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
-                    <div class="item-image">
-                        <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80" alt="تصميم واجهات">
-                        <div class="item-overlay">
-                            <div class="overlay-content">
-                                <h3>موقع معرض فني</h3>
-                                <p>تصميم واجهات - 2024</p>
-                                <button class="view-project">عرض التفاصيل</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-info">
-                        <h3>موقع معرض فني</h3>
-                        <p>تصميم واجهات - 2024</p>
-                    </div>
-                </div>
-            </div>
+    <!-- WORK -->
+    <section id="work" class="work section">
+        <h2 class="section-title fade-section">الأعمال</h2>
+        <div class="work-grid">
+            <div class="work-item fade-section"></div>
+            <div class="work-item fade-section"></div>
+            <div class="work-item fade-section"></div>
+            <div class="work-item fade-section"></div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">خدماتي</h2>
-                <div class="section-line"></div>
-                <p class="section-subtitle">ما أقدمه من إبداع</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card" data-aos="fade-up" data-aos-duration="800">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>تصميم جرافيك</h3>
-                    <p>تصاميم فريدة مستوحاة من الفن الكلاسيكي للطباعة والرقمي</p>
-                </div>
-                
-                <div class="service-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                    <div class="service-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3>هويات بصرية</h3>
-                    <p>هويات مؤسسية فاخرة تعكس الأناقة والتميز</p>
-                </div>
-                
-                <div class="service-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>فن رقمي</h3>
-                    <p>لوحات فنية رقمية تجمع بين التقنيات الحديثة والأساليب الكلاسيكية</p>
-                </div>
-                
-                <div class="service-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                    <div class="service-icon">
-                        <i class="fas fa-vector-square"></i>
-                    </div>
-                    <h3>تصميم واجهات</h3>
-                    <p>واجهات مستخدم جميلة ووظيفية للمواقع والتطبيقات</p>
-                </div>
-            </div>
-        </div>
+    <!-- CONTACT -->
+    <section id="contact" class="contact section fade-section">
+        <h2 class="section-title">تواصل معي</h2>
+        <p class="section-text">مستعد للعمل على مشاريع جديدة — تفضل بالرسالة:</p>
+
+        <form class="contact-form">
+            <input type="text" placeholder="الاسم">
+            <input type="email" placeholder="البريد الإلكتروني">
+            <textarea placeholder="اكتب رسالتك هنا"></textarea>
+            <button type="submit" class="btn">إرسال</button>
+        </form>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="contact-background">
-            <div class="statue-contact-bg"></div>
-            <div class="overlay-contact"></div>
-        </div>
-        
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-text" data-aos="fade-right" data-aos-duration="1000">
-                    <h2 class="contact-title">لنعمل معًا</h2>
-                    <p class="contact-subtitle">
-                        هل لديك فكرة تحتاج إلى من يحولها إلى واقع فني؟
-                    </p>
-                    
-                    <div class="contact-info">
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>البريد الإلكتروني</h4>
-                                <p>ahmed@classicdesign.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>الهاتف</h4>
-                                <p>+966 50 123 4567</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form" data-aos="fade-left" data-aos-duration="1000">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="الاسم" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="email" placeholder="البريد الإلكتروني" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea placeholder="رسالتك" rows="5" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-submit">
-                            <span>إرسال الرسالة</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-text">A</span>
-                    <p>مصمم جرافيكي كلاسيكي</p>
-                </div>
-                
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-behance"></i></a>
-                    <a href="#"><i class="fab fa-dribbble"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-                
-                <div class="footer-copyright">
-                    <p>© 2024 أحمد المصمم. جميع الحقوق محفوظة.</p>
-                </div>
-            </div>
-        </div>
+        © 2025 — Portfolio
     </footer>
 
-    <!-- Back to Top -->
-    <button class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- Project Modal -->
-    <div class="project-modal">
-        <div class="modal-content">
-            <button class="modal-close"><i class="fas fa-times"></i></button>
-            <div class="modal-body">
-                <!-- Dynamic content -->
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
