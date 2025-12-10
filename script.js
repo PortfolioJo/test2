@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initThemeSwitcher();
     initLanguageSwitcher();
-    initAnimations();
     initCurrentYear();
     initScrollEffects();
     initHoverEffects();
     initProjectModal();
     initContactForm();
+    
+    // تأخير تحميل الأنيميشنات للحصول على سرعة أفضل
+    setTimeout(initAnimations, 100);
 });
 
 // ===========================================
@@ -187,6 +189,7 @@ const translations = {
         'nav.about': 'About',
         'nav.work': 'Work',
         'nav.services': 'Services',
+        'nav.gallery': 'Gallery',
         'nav.contact': 'Contact',
         
         // Language toggle
@@ -243,6 +246,16 @@ const translations = {
         'services.service3.title': 'Digital Art',
         'services.service3.description': 'Engaging visual content for social media that enhances brand presence and follows modern trends.',
         
+        // Gallery
+        'gallery.title': 'Visual Gallery',
+        'gallery.subtitle': 'A curated collection of artistic expressions',
+        'gallery.item1': 'Abstract Design',
+        'gallery.item2': 'Digital Print',
+        'gallery.item3': 'Calligraphy Art',
+        'gallery.item4': 'Digital Coloring',
+        'gallery.item5': 'Geometric Design',
+        'gallery.item6': 'Cinematic Art',
+        
         // Contact
         'contact.title': 'Let\'s Connect',
         'contact.subtitle': 'Ready to bring your vision to life?',
@@ -273,6 +286,7 @@ const translations = {
         'nav.about': 'عنّي',
         'nav.work': 'أعمالي',
         'nav.services': 'خدماتي',
+        'nav.gallery': 'المعرض',
         'nav.contact': 'اتصل بي',
         
         // Language toggle
@@ -329,6 +343,16 @@ const translations = {
         'services.service3.title': 'الفن الرقمي',
         'services.service3.description': 'محتوى بصري جذاب لوسائل التواصل الاجتماعي يعزز حضور العلامة التجارية ويواكب الاتجاهات الحديثة.',
         
+        // Gallery
+        'gallery.title': 'المعرض البصري',
+        'gallery.subtitle': 'مجموعة مختارة من التعبيرات الفنية',
+        'gallery.item1': 'تصميم تجريدي',
+        'gallery.item2': 'طباعة رقمية',
+        'gallery.item3': 'فن الخط العربي',
+        'gallery.item4': 'تلوين رقمي',
+        'gallery.item5': 'تصميم هندسي',
+        'gallery.item6': 'فن سينمائي',
+        
         // Contact
         'contact.title': 'لنتواصل',
         'contact.subtitle': 'مستعد لتحويل رؤيتك إلى واقع؟',
@@ -365,7 +389,7 @@ function updateTexts(lang) {
 }
 
 // ===========================================
-// Animations
+// Animations (محسّنة للسرعة)
 // ===========================================
 
 function initAnimations() {
@@ -373,56 +397,56 @@ function initAnimations() {
     
     gsap.registerPlugin(ScrollTrigger);
     
-    // Hero animations
+    // Hero animations - سريعة
     gsap.from('.hero__label', {
-        y: 20,
+        y: 10,
         opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
+        duration: 0.6,
+        ease: 'power2.out'
     });
     
     gsap.from('.hero__title-line--1', {
-        y: 40,
+        y: 20,
         opacity: 0,
-        duration: 1,
-        delay: 0.3,
-        ease: 'power3.out'
+        duration: 0.7,
+        delay: 0.2,
+        ease: 'power2.out'
     });
     
     gsap.from('.hero__title-line--2', {
-        y: 40,
+        y: 20,
         opacity: 0,
-        duration: 1,
-        delay: 0.5,
-        ease: 'power3.out'
+        duration: 0.7,
+        delay: 0.3,
+        ease: 'power2.out'
     });
     
     gsap.from('.hero__subtitle', {
-        y: 30,
+        y: 15,
         opacity: 0,
-        duration: 0.8,
-        delay: 0.7,
-        ease: 'power3.out'
+        duration: 0.6,
+        delay: 0.4,
+        ease: 'power2.out'
     });
     
     gsap.from('.hero__actions', {
-        y: 30,
+        y: 15,
         opacity: 0,
-        duration: 0.8,
-        delay: 0.9,
-        ease: 'power3.out'
+        duration: 0.6,
+        delay: 0.5,
+        ease: 'power2.out'
     });
     
     // Hero scroll line animation
     gsap.to('.hero__scroll-line', {
         height: 0,
-        duration: 2,
+        duration: 1.5,
         repeat: -1,
         yoyo: true,
         ease: 'power2.inOut'
     });
     
-    // Section animations
+    // Fast section animations with early trigger
     gsap.utils.toArray('.section').forEach(section => {
         const title = section.querySelector('.section__title');
         const subtitle = section.querySelector('.section__subtitle');
@@ -431,12 +455,13 @@ function initAnimations() {
             gsap.from(title, {
                 scrollTrigger: {
                     trigger: section,
-                    start: 'top 80%'
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
                 },
-                y: 40,
+                y: 20,
                 opacity: 0,
-                duration: 0.8,
-                ease: 'power3.out'
+                duration: 0.5,
+                ease: 'power2.out'
             });
         }
         
@@ -444,43 +469,61 @@ function initAnimations() {
             gsap.from(subtitle, {
                 scrollTrigger: {
                     trigger: section,
-                    start: 'top 80%'
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
                 },
-                y: 30,
+                y: 15,
                 opacity: 0,
-                duration: 0.6,
-                delay: 0.2,
-                ease: 'power3.out'
+                duration: 0.4,
+                delay: 0.1,
+                ease: 'power2.out'
             });
         }
     });
     
-    // Project cards animation
+    // Fast project cards animation
     const projectCards = document.querySelectorAll('.project-card');
     gsap.from(projectCards, {
         scrollTrigger: {
             trigger: '.projects__grid',
-            start: 'top 80%'
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
         },
-        y: 60,
+        y: 30,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out'
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'power2.out'
     });
     
-    // Service cards animation
+    // Fast service cards animation
     const serviceCards = document.querySelectorAll('.service-card');
     gsap.from(serviceCards, {
         scrollTrigger: {
             trigger: '.services__grid',
-            start: 'top 80%'
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
         },
-        y: 40,
+        y: 20,
         opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out'
+        duration: 0.4,
+        stagger: 0.05,
+        ease: 'power2.out'
+    });
+    
+    // Fast gallery items animation
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    gsap.from(galleryItems, {
+        scrollTrigger: {
+            trigger: '.gallery__grid',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.03,
+        ease: 'back.out(1.2)'
     });
 }
 
@@ -496,7 +539,7 @@ function initCurrentYear() {
 }
 
 // ===========================================
-// Scroll Effects
+// Scroll Effects (محسّنة)
 // ===========================================
 
 function initScrollEffects() {
@@ -511,10 +554,29 @@ function initScrollEffects() {
             if (targetElement) {
                 e.preventDefault();
                 
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                // Smooth scroll بدون مكتبات خارجية (أسرع)
+                const targetPosition = targetElement.offsetTop - 80;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 500;
+                let start = null;
+                
+                function animation(currentTime) {
+                    if (start === null) start = currentTime;
+                    const timeElapsed = currentTime - start;
+                    const run = ease(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+                
+                function ease(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t + b;
+                    t--;
+                    return -c / 2 * (t * (t - 2) - 1) + b;
+                }
+                
+                requestAnimationFrame(animation);
             }
         });
     });
@@ -557,6 +619,27 @@ function initHoverEffects() {
         
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Gallery items hover effect
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryItems.forEach(item => {
+        const image = item.querySelector('.gallery-item__image');
+        const overlay = item.querySelector('.gallery-item__overlay');
+        const title = item.querySelector('.gallery-item__title');
+        
+        item.addEventListener('mouseenter', function() {
+            image.style.transform = 'scale(1.05)';
+            overlay.style.opacity = '1';
+            title.style.transform = 'translateY(0)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            image.style.transform = 'scale(1)';
+            overlay.style.opacity = '0';
+            title.style.transform = 'translateY(20px)';
         });
     });
     
