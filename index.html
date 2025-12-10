@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aseel | أسيل - مصممة جرافيك رقمية</title>
-    <meta name="description" content="مصممة جرافيك رقمية متخصصة في الهوية البصرية وتصميم الويب والفن الرقمي. Digital graphic designer specializing in visual identity, web design, and digital art.">
+    <title>Aseel | Digital Graphic Designer - Visual Artistry & Brand Identity</title>
+    <meta name="description" content="Aseel - Digital Graphic Designer specializing in visual identity, web design, and artistic direction. Creating elegant digital experiences.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,9 @@
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖌️</text></svg>">
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
@@ -23,62 +26,25 @@
         <nav class="nav container">
             <a href="#hero" class="nav__logo">
                 <span class="nav__logo-text">Aseel</span>
-                <span class="nav__logo-sub" data-lang="ar">مصممة جرافيك</span>
-                <span class="nav__logo-sub" data-lang="en" style="display: none;">Visual Designer</span>
+                <span class="nav__logo-sub">Visual Designer</span>
             </a>
             
             <div class="nav__menu" id="navMenu">
                 <ul class="nav__list">
-                    <li>
-                        <a href="#hero" class="nav__link active">
-                            <span data-lang="ar">الرئيسية</span>
-                            <span data-lang="en" style="display: none;">Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#about" class="nav__link">
-                            <span data-lang="ar">من أنا</span>
-                            <span data-lang="en" style="display: none;">About</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#projects" class="nav__link">
-                            <span data-lang="ar">أعمالي</span>
-                            <span data-lang="en" style="display: none;">Work</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#services" class="nav__link">
-                            <span data-lang="ar">الخدمات</span>
-                            <span data-lang="en" style="display: none;">Services</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#gallery" class="nav__link">
-                            <span data-lang="ar">المعرض</span>
-                            <span data-lang="en" style="display: none;">Gallery</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#contact" class="nav__link">
-                            <span data-lang="ar">تواصل</span>
-                            <span data-lang="en" style="display: none;">Connect</span>
-                        </a>
-                    </li>
+                    <li><a href="#hero" class="nav__link active">Home</a></li>
+                    <li><a href="#about" class="nav__link">About</a></li>
+                    <li><a href="#projects" class="nav__link">Work</a></li>
+                    <li><a href="#services" class="nav__link">Services</a></li>
+                    <li><a href="#gallery" class="nav__link">Gallery</a></li>
+                    <li><a href="#contact" class="nav__link">Connect</a></li>
                 </ul>
             </div>
             
             <div class="nav__actions">
-                <button class="language-toggle" id="languageToggle" aria-label="تبديل اللغة">
-                    <span class="language-toggle__text" data-lang="ar">EN</span>
-                    <span class="language-toggle__text" data-lang="en" style="display: none;">AR</span>
-                </button>
-                
-                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon theme-toggle__icon"></i>
                 </button>
-                
-                <button class="nav__toggle" id="navToggle" aria-label="قائمة التنقل">
+                <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
                     <span class="nav__toggle-line"></span>
                     <span class="nav__toggle-line"></span>
                     <span class="nav__toggle-line"></span>
@@ -93,31 +59,23 @@
         
         <div class="hero__content container">
             <div class="hero__text">
-                <div class="hero__label" data-lang="ar">فن رقمي</div>
-                <div class="hero__label" data-lang="en" style="display: none;">Digital Artistry</div>
-                
+                <div class="hero__label">Digital Artistry</div>
                 <h1 class="hero__title">
                     <span class="hero__title-line hero__title-line--1">Aseel</span>
-                    <span class="hero__title-line hero__title-line--2" data-lang="ar">مصممة جرافيك رقمية</span>
-                    <span class="hero__title-line hero__title-line--2" data-lang="en" style="display: none;">Graphic & Digital Designer</span>
+                    <span class="hero__title-line hero__title-line--2">Graphic & Digital Designer</span>
                 </h1>
                 
-                <p class="hero__subtitle" data-lang="ar">
-                    أصمم هويات بصرية تجمع بين البساطة والجماليات الحديثة وسرد القصص العاطفية.
-                </p>
-                <p class="hero__subtitle" data-lang="en" style="display: none;">
+                <p class="hero__subtitle">
                     Crafting visual identities that blend minimalism, modern aesthetics, and emotional storytelling.
                 </p>
                 
                 <div class="hero__actions">
                     <a href="#projects" class="btn btn--primary btn--large">
-                        <span class="btn__text" data-lang="ar">عرض الأعمال</span>
-                        <span class="btn__text" data-lang="en" style="display: none;">View Portfolio</span>
+                        <span class="btn__text">View Portfolio</span>
                         <i class="btn__icon fas fa-arrow-down"></i>
                     </a>
                     <a href="#contact" class="btn btn--outline btn--large">
-                        <span class="btn__text" data-lang="ar">ابدأ مشروعاً</span>
-                        <span class="btn__text" data-lang="en" style="display: none;">Start a Project</span>
+                        <span class="btn__text">Start a Project</span>
                         <i class="btn__icon fas fa-star"></i>
                     </a>
                 </div>
@@ -125,8 +83,7 @@
         </div>
         
         <div class="hero__scroll">
-            <span class="hero__scroll-text" data-lang="ar">اكتشف المزيد</span>
-            <span class="hero__scroll-text" data-lang="en" style="display: none;">Explore</span>
+            <span class="hero__scroll-text">Explore</span>
             <div class="hero__scroll-line"></div>
         </div>
         
@@ -140,11 +97,9 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">01</span>
-                    <span class="section__title-text" data-lang="ar">من أنا</span>
-                    <span class="section__title-text" data-lang="en" style="display: none;">About Me</span>
+                    <span class="section__title-text">Creative Philosophy</span>
                 </h2>
-                <p class="section__subtitle" data-lang="ar">الفن يلتقي بالهوية في عالم رقمي</p>
-                <p class="section__subtitle" data-lang="en" style="display: none;">Where art meets purpose in digital form</p>
+                <p class="section__subtitle">Where art meets purpose in digital form</p>
             </div>
             
             <div class="about__content">
@@ -153,43 +108,25 @@
                         <div class="image-frame__inner">
                             <div class="image-placeholder">
                                 <i class="image-placeholder__icon fas fa-palette"></i>
-                                <span class="image-placeholder__text" data-lang="ar">أسيل</span>
-                                <span class="image-placeholder__text" data-lang="en" style="display: none;">Aseel</span>
+                                <span class="image-placeholder__text">Visual Storyteller</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="about__text">
-                    <h3 class="about__heading" data-lang="ar">تصميم يحكي قصة</h3>
-                    <h3 class="about__heading" data-lang="en" style="display: none;">Design with Intention</h3>
+                    <h3 class="about__heading">Design with Intention</h3>
                     
                     <div class="about__description">
-                        <p data-lang="ar">
-                            أنا مصممة جرافيك رقمية متخصصة في تحويل الأفكار المجردة إلى تجارب بصرية مؤثرة. 
-                            أؤمن أن التصميم الجيد ليس فقط جميلاً، بل يحكي قصة ويثير المشاعر.
-                        </p>
-                        <p data-lang="en" style="display: none;">
-                            I'm a digital graphic designer specializing in transforming abstract concepts into 
-                            compelling visual experiences. I believe good design isn't just beautiful—it tells 
-                            a story and evokes emotions.
-                        </p>
+                        <p>I specialize in transforming abstract concepts into compelling visual experiences that resonate with audiences. My approach combines artistic sensibility with strategic thinking to create designs that not only look beautiful but also communicate effectively.</p>
                         
-                        <p data-lang="ar">
-                            مع خبرة تزيد عن 5 سنوات في مجال التصميم الرقمي، عملت مع علامات تجارية محلية 
-                            وعالمية لبناء هويات بصرية قوية وتجارب مستخدم لا تُنسى.
-                        </p>
-                        <p data-lang="en" style="display: none;">
-                            With over 5 years of experience in digital design, I've collaborated with local 
-                            and international brands to build strong visual identities and memorable user experiences.
-                        </p>
+                        <p>With over 5 years of experience in digital design, I've collaborated with brands worldwide to build distinctive visual identities and memorable user experiences that stand the test of time.</p>
                     </div>
                     
                     <div class="about__signature">
                         <div class="signature">
                             <span class="signature__name">Aseel</span>
-                            <span class="signature__title" data-lang="ar">مصممة جرافيك رقمية</span>
-                            <span class="signature__title" data-lang="en" style="display: none;">Digital Designer</span>
+                            <span class="signature__title">Digital Designer</span>
                         </div>
                     </div>
                 </div>
@@ -203,45 +140,33 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">02</span>
-                    <span class="section__title-text" data-lang="ar">أعمال مختارة</span>
-                    <span class="section__title-text" data-lang="en" style="display: none;">Featured Work</span>
+                    <span class="section__title-text">Featured Work</span>
                 </h2>
-                <p class="section__subtitle" data-lang="ar">أحدث المشاريع التي تعكس فلسفتي التصميمية</p>
-                <p class="section__subtitle" data-lang="en" style="display: none;">Selected projects showcasing design excellence</p>
+                <p class="section__subtitle">Selected projects showcasing design excellence</p>
             </div>
             
             <div class="projects__grid">
                 <article class="project-card" data-project="1">
                     <div class="project-card__image project-card__image--1">
                         <div class="project-card__overlay">
-                            <span class="project-card__category" data-lang="ar">هوية بصرية</span>
-                            <span class="project-card__category" data-lang="en" style="display: none;">Brand Identity</span>
+                            <span class="project-card__category">Brand Identity</span>
                             <span class="project-card__year">2024</span>
                         </div>
                     </div>
                     
                     <div class="project-card__content">
-                        <h3 class="project-card__title" data-lang="ar">دار أزياء فاخرة</h3>
-                        <h3 class="project-card__title" data-lang="en" style="display: none;">Luxury Fashion House</h3>
-                        
-                        <p class="project-card__description" data-lang="ar">
-                            هوية بصرية متكاملة لدار أزياء تهدف إلى الجمع بين التراث والحداثة
-                        </p>
-                        <p class="project-card__description" data-lang="en" style="display: none;">
-                            Complete visual identity for a fashion brand blending heritage with modernity
-                        </p>
+                        <h3 class="project-card__title">Luxury Fashion House</h3>
+                        <p class="project-card__description">Complete visual identity for a high-end fashion brand blending heritage with modernity</p>
                         
                         <div class="project-card__tags">
-                            <span class="tag" data-lang="ar">تصميم الشعار</span>
-                            <span class="tag" data-lang="en" style="display: none;">Logo Design</span>
-                            <span class="tag" data-lang="ar">الهوية البصرية</span>
-                            <span class="tag" data-lang="en" style="display: none;">Visual Identity</span>
+                            <span class="tag">Logo Design</span>
+                            <span class="tag">Visual Identity</span>
+                            <span class="tag">Typography</span>
                         </div>
                         
                         <button class="project-card__link project-view-btn" data-project="1">
-                            <span data-lang="ar">عرض دراسة الحالة</span>
-                            <span data-lang="en" style="display: none;">View Case Study</span>
-                            <i class="fas fa-arrow-left"></i>
+                            <span>View Case Study</span>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </article>
@@ -249,33 +174,24 @@
                 <article class="project-card project-card--featured" data-project="2">
                     <div class="project-card__image project-card__image--2">
                         <div class="project-card__overlay">
-                            <span class="project-card__category" data-lang="ar">تصميم ويب</span>
-                            <span class="project-card__category" data-lang="en" style="display: none;">Web Design</span>
+                            <span class="project-card__category">Web Design</span>
                             <span class="project-card__year">2024</span>
                         </div>
                     </div>
                     
                     <div class="project-card__content">
-                        <h3 class="project-card__title" data-lang="ar">معرض فني تفاعلي</h3>
-                        <h3 class="project-card__title" data-lang="en" style="display: none;">Interactive Art Gallery</h3>
-                        
-                        <p class="project-card__description" data-lang="ar">
-                            منصة رقمية لعرض الأعمال الفنية بتجربة مستخدم غامرة
-                        </p>
-                        <p class="project-card__description" data-lang="en" style="display: none;">
-                            Digital platform for art exhibition with immersive user experience
-                        </p>
+                        <h3 class="project-card__title">Interactive Art Gallery</h3>
+                        <p class="project-card__description">Digital platform for art exhibition with immersive user experience</p>
                         
                         <div class="project-card__tags">
-                            <span class="tag">UI/UX</span>
-                            <span class="tag" data-lang="ar">تفاعلية</span>
-                            <span class="tag" data-lang="en" style="display: none;">Interaction</span>
+                            <span class="tag">UI/UX Design</span>
+                            <span class="tag">Interaction</span>
+                            <span class="tag">Digital Art</span>
                         </div>
                         
                         <button class="project-card__link project-view-btn" data-project="2">
-                            <span data-lang="ar">عرض دراسة الحالة</span>
-                            <span data-lang="en" style="display: none;">View Case Study</span>
-                            <i class="fas fa-arrow-left"></i>
+                            <span>View Case Study</span>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </article>
@@ -283,34 +199,24 @@
                 <article class="project-card" data-project="3">
                     <div class="project-card__image project-card__image--3">
                         <div class="project-card__overlay">
-                            <span class="project-card__category" data-lang="ar">إعلان</span>
-                            <span class="project-card__category" data-lang="en" style="display: none;">Advertising</span>
+                            <span class="project-card__category">Advertising</span>
                             <span class="project-card__year">2023</span>
                         </div>
                     </div>
                     
                     <div class="project-card__content">
-                        <h3 class="project-card__title" data-lang="ar">حملة مشروب فاخر</h3>
-                        <h3 class="project-card__title" data-lang="en" style="display: none;">Premium Beverage Campaign</h3>
-                        
-                        <p class="project-card__description" data-lang="ar">
-                            حملة إعلانية شاملة مع تصوير احترافي وهوية بصرية متماسكة
-                        </p>
-                        <p class="project-card__description" data-lang="en" style="display: none;">
-                            Comprehensive advertising campaign with professional photography
-                        </p>
+                        <h3 class="project-card__title">Premium Beverage Campaign</h3>
+                        <p class="project-card__description">Comprehensive advertising campaign with professional photography</p>
                         
                         <div class="project-card__tags">
-                            <span class="tag" data-lang="ar">إعلان</span>
-                            <span class="tag" data-lang="en" style="display: none;">Advertising</span>
-                            <span class="tag" data-lang="ar">تصوير</span>
-                            <span class="tag" data-lang="en" style="display: none;">Photography</span>
+                            <span class="tag">Advertising</span>
+                            <span class="tag">Photography</span>
+                            <span class="tag">Marketing</span>
                         </div>
                         
                         <button class="project-card__link project-view-btn" data-project="3">
-                            <span data-lang="ar">عرض دراسة الحالة</span>
-                            <span data-lang="en" style="display: none;">View Case Study</span>
-                            <i class="fas fa-arrow-left"></i>
+                            <span>View Case Study</span>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </article>
@@ -318,8 +224,7 @@
             
             <div class="section__footer">
                 <a href="#" class="btn btn--outline">
-                    <span class="btn__text" data-lang="ar">عرض جميع المشاريع</span>
-                    <span class="btn__text" data-lang="en" style="display: none;">View All Projects</span>
+                    <span class="btn__text">View All Projects</span>
                     <i class="btn__icon fas fa-archive"></i>
                 </a>
             </div>
@@ -332,11 +237,9 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">03</span>
-                    <span class="section__title-text" data-lang="ar">الخدمات</span>
-                    <span class="section__title-text" data-lang="en" style="display: none;">Services</span>
+                    <span class="section__title-text">Design Services</span>
                 </h2>
-                <p class="section__subtitle" data-lang="ar">ما يمكنني تقديمه لعلامتك التجارية</p>
-                <p class="section__subtitle" data-lang="en" style="display: none;">What I offer for your brand</p>
+                <p class="section__subtitle">Transforming visions into visual realities</p>
             </div>
             
             <div class="services__grid">
@@ -345,25 +248,19 @@
                         <div class="service-card__icon">
                             <i class="fas fa-paint-brush"></i>
                         </div>
-                        <h3 class="service-card__title" data-lang="ar">تصميم الويب</h3>
-                        <h3 class="service-card__title" data-lang="en" style="display: none;">Web Design</h3>
+                        <h3 class="service-card__title">Web Design</h3>
                     </div>
                     
                     <div class="service-card__body">
-                        <p class="service-card__description" data-lang="ar">
-                            تصميم مواقع ويب معاصرة تجمع بين الجماليات والوظائفية، مع تركيز كامل على تجربة المستخدم والأداء.
-                        </p>
-                        <p class="service-card__description" data-lang="en" style="display: none;">
+                        <p class="service-card__description">
                             Contemporary website designs that marry aesthetics with functionality, focusing on user experience and performance.
                         </p>
                         
                         <ul class="service-card__features">
-                            <li data-lang="ar">تصميم UI/UX متكامل</li>
-                            <li data-lang="en" style="display: none;">UI/UX Design</li>
-                            <li data-lang="ar">مواقع متجاوبة</li>
-                            <li data-lang="en" style="display: none;">Responsive Design</li>
-                            <li data-lang="ar">تحسين سرعة الأداء</li>
-                            <li data-lang="en" style="display: none;">Performance Optimization</li>
+                            <li>UI/UX Design</li>
+                            <li>Responsive Development</li>
+                            <li>Performance Optimization</li>
+                            <li>SEO Integration</li>
                         </ul>
                     </div>
                 </div>
@@ -373,25 +270,19 @@
                         <div class="service-card__icon">
                             <i class="fas fa-palette"></i>
                         </div>
-                        <h3 class="service-card__title" data-lang="ar">الهوية البصرية</h3>
-                        <h3 class="service-card__title" data-lang="en" style="display: none;">Brand Identity</h3>
+                        <h3 class="service-card__title">Brand Identity</h3>
                     </div>
                     
                     <div class="service-card__body">
-                        <p class="service-card__description" data-lang="ar">
-                            بناء هوية بصرية متكاملة تعبر عن قيم علامتك التجارية وتخلق انطباعًا مميزًا في أذهان العملاء.
-                        </p>
-                        <p class="service-card__description" data-lang="en" style="display: none;">
+                        <p class="service-card__description">
                             Complete visual identity systems that express brand values and create memorable impressions.
                         </p>
                         
                         <ul class="service-card__features">
-                            <li data-lang="ar">تصميم الشعار</li>
-                            <li data-lang="en" style="display: none;">Logo Design</li>
-                            <li data-lang="ar">دليل الهوية</li>
-                            <li data-lang="en" style="display: none;">Brand Guidelines</li>
-                            <li data-lang="ar">الأنظمة اللونية</li>
-                            <li data-lang="en" style="display: none;">Color Systems</li>
+                            <li>Logo Design</li>
+                            <li>Brand Guidelines</li>
+                            <li>Color Systems</li>
+                            <li>Typography</li>
                         </ul>
                     </div>
                 </div>
@@ -401,25 +292,19 @@
                         <div class="service-card__icon">
                             <i class="fas fa-camera-retro"></i>
                         </div>
-                        <h3 class="service-card__title" data-lang="ar">الفن لوسائل التواصل</h3>
-                        <h3 class="service-card__title" data-lang="en" style="display: none;">Digital Art</h3>
+                        <h3 class="service-card__title">Digital Art</h3>
                     </div>
                     
                     <div class="service-card__body">
-                        <p class="service-card__description" data-lang="ar">
-                            إنشاء محتوى بصري جذاب ومتناسق لوسائل التواصل الاجتماعي يعزز حضور العلامة التجارية.
-                        </p>
-                        <p class="service-card__description" data-lang="en" style="display: none;">
+                        <p class="service-card__description">
                             Engaging visual content for social media that enhances brand presence and follows modern trends.
                         </p>
                         
                         <ul class="service-card__features">
-                            <li data-lang="ar">تصميم منشورات</li>
-                            <li data-lang="en" style="display: none;">Social Media Graphics</li>
-                            <li data-lang="ar">فيديوهات قصيرة</li>
-                            <li data-lang="en" style="display: none;">Short Videos</li>
-                            <li data-lang="ar">ستوري مصممة</li>
-                            <li data-lang="en" style="display: none;">Story Design</li>
+                            <li>Social Media Graphics</li>
+                            <li>Short Videos</li>
+                            <li>Story Design</li>
+                            <li>Custom Advertising</li>
                         </ul>
                     </div>
                 </div>
@@ -433,19 +318,16 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">04</span>
-                    <span class="section__title-text" data-lang="ar">المعرض الفني</span>
-                    <span class="section__title-text" data-lang="en" style="display: none;">Visual Gallery</span>
+                    <span class="section__title-text">Visual Gallery</span>
                 </h2>
-                <p class="section__subtitle" data-lang="ar">مجموعة مختارة من الأعمال الفنية والإبداعية</p>
-                <p class="section__subtitle" data-lang="en" style="display: none;">A curated collection of artistic expressions</p>
+                <p class="section__subtitle">A curated collection of artistic expressions</p>
             </div>
             
             <div class="gallery__grid">
                 <div class="gallery-item">
                     <div class="gallery-item__image gallery-item__image--1">
                         <div class="gallery-item__overlay">
-                            <span class="gallery-item__title" data-lang="ar">تصميم تجريدي</span>
-                            <span class="gallery-item__title" data-lang="en" style="display: none;">Abstract Design</span>
+                            <span class="gallery-item__title">Abstract Design</span>
                         </div>
                     </div>
                 </div>
@@ -453,8 +335,7 @@
                 <div class="gallery-item">
                     <div class="gallery-item__image gallery-item__image--2">
                         <div class="gallery-item__overlay">
-                            <span class="gallery-item__title" data-lang="ar">طباعة رقمية</span>
-                            <span class="gallery-item__title" data-lang="en" style="display: none;">Digital Print</span>
+                            <span class="gallery-item__title">Digital Print</span>
                         </div>
                     </div>
                 </div>
@@ -462,8 +343,7 @@
                 <div class="gallery-item">
                     <div class="gallery-item__image gallery-item__image--3">
                         <div class="gallery-item__overlay">
-                            <span class="gallery-item__title" data-lang="ar">فن الخط</span>
-                            <span class="gallery-item__title" data-lang="en" style="display: none;">Calligraphy Art</span>
+                            <span class="gallery-item__title">Calligraphy Art</span>
                         </div>
                     </div>
                 </div>
@@ -471,8 +351,7 @@
                 <div class="gallery-item">
                     <div class="gallery-item__image gallery-item__image--4">
                         <div class="gallery-item__overlay">
-                            <span class="gallery-item__title" data-lang="ar">تلوين رقمي</span>
-                            <span class="gallery-item__title" data-lang="en" style="display: none;">Digital Coloring</span>
+                            <span class="gallery-item__title">Digital Coloring</span>
                         </div>
                     </div>
                 </div>
@@ -480,8 +359,7 @@
                 <div class="gallery-item">
                     <div class="gallery-item__image gallery-item__image--5">
                         <div class="gallery-item__overlay">
-                            <span class="gallery-item__title" data-lang="ar">تصميم هندسي</span>
-                            <span class="gallery-item__title" data-lang="en" style="display: none;">Geometric Design</span>
+                            <span class="gallery-item__title">Geometric Design</span>
                         </div>
                     </div>
                 </div>
@@ -489,8 +367,7 @@
                 <div class="gallery-item">
                     <div class="gallery-item__image gallery-item__image--6">
                         <div class="gallery-item__overlay">
-                            <span class="gallery-item__title" data-lang="ar">فن سينمائي</span>
-                            <span class="gallery-item__title" data-lang="en" style="display: none;">Cinematic Art</span>
+                            <span class="gallery-item__title">Cinematic Art</span>
                         </div>
                     </div>
                 </div>
@@ -504,22 +381,15 @@
             <div class="section__header">
                 <h2 class="section__title">
                     <span class="section__title-number">05</span>
-                    <span class="section__title-text" data-lang="ar">تواصل معي</span>
-                    <span class="section__title-text" data-lang="en" style="display: none;">Let's Connect</span>
+                    <span class="section__title-text">Let's Connect</span>
                 </h2>
-                <p class="section__subtitle" data-lang="ar">لنصنع شيئًا مميزًا معًا</p>
-                <p class="section__subtitle" data-lang="en" style="display: none;">Ready to bring your vision to life?</p>
+                <p class="section__subtitle">Ready to bring your vision to life?</p>
             </div>
             
             <div class="contact__content">
                 <div class="contact__intro">
-                    <h3 class="contact__heading" data-lang="ar">لنصنع شيئًا مميزًا معًا</h3>
-                    <h3 class="contact__heading" data-lang="en" style="display: none;">Let's create something remarkable together</h3>
-                    
-                    <p class="contact__description" data-lang="ar">
-                        هل لديك فكرة لمشروع؟ أود الاستماع إليك. دعنا نناقش كيف يمكننا تحويل رؤيتك إلى واقع ملموس.
-                    </p>
-                    <p class="contact__description" data-lang="en" style="display: none;">
+                    <h3 class="contact__heading">Let's create something remarkable together</h3>
+                    <p class="contact__description">
                         Have a project in mind? I'd love to hear about it. Let's discuss how we can transform your vision into a tangible reality.
                     </p>
                 </div>
@@ -530,8 +400,7 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-detail__content">
-                            <h4 class="contact-detail__title" data-lang="ar">البريد الإلكتروني</h4>
-                            <h4 class="contact-detail__title" data-lang="en" style="display: none;">Email</h4>
+                            <h4 class="contact-detail__title">Email</h4>
                             <a href="mailto:hello@aseel.design" class="contact-detail__value">hello@aseel.design</a>
                         </div>
                     </div>
@@ -541,10 +410,8 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-detail__content">
-                            <h4 class="contact-detail__title" data-lang="ar">الموقع</h4>
-                            <h4 class="contact-detail__title" data-lang="en" style="display: none;">Location</h4>
-                            <span class="contact-detail__value" data-lang="ar">متاحة عالميًا</span>
-                            <span class="contact-detail__value" data-lang="en" style="display: none;">Available Worldwide</span>
+                            <h4 class="contact-detail__title">Location</h4>
+                            <span class="contact-detail__value">Available Worldwide</span>
                         </div>
                     </div>
                     
@@ -553,18 +420,14 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="contact-detail__content">
-                            <h4 class="contact-detail__title" data-lang="ar">التوافر</h4>
-                            <h4 class="contact-detail__title" data-lang="en" style="display: none;">Availability</h4>
-                            <span class="contact-detail__value" data-lang="ar">أقبل مشاريع جديدة</span>
-                            <span class="contact-detail__value" data-lang="en" style="display: none;">Taking new projects</span>
+                            <h4 class="contact-detail__title">Availability</h4>
+                            <span class="contact-detail__value">Taking new projects</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact__social">
-                    <h4 class="contact__social-title" data-lang="ar">تابع رحلتي</h4>
-                    <h4 class="contact__social-title" data-lang="en" style="display: none;">Follow my journey</h4>
-                    
+                    <h4 class="contact__social-title">Follow my journey</h4>
                     <div class="social-links">
                         <a href="https://dribbble.com" class="social-link" target="_blank" aria-label="Dribbble">
                             <i class="fab fa-dribbble"></i>
@@ -595,52 +458,25 @@
                 <div class="footer__brand">
                     <a href="#hero" class="footer__logo">
                         <span class="footer__logo-text">Aseel</span>
-                        <span class="footer__logo-sub" data-lang="ar">مصممة جرافيك رقمية</span>
-                        <span class="footer__logo-sub" data-lang="en" style="display: none;">Digital Designer</span>
+                        <span class="footer__logo-sub">Visual Designer</span>
                     </a>
-                    <p class="footer__tagline" data-lang="ar">
-                        أصمم تجارب رقمية بغرض وجمال
-                    </p>
-                    <p class="footer__tagline" data-lang="en" style="display: none;">
-                        Creating digital experiences with purpose and beauty
-                    </p>
+                    <p class="footer__tagline">Creating digital experiences with purpose and beauty</p>
                 </div>
                 
                 <div class="footer__nav">
                     <nav class="footer__nav-menu">
-                        <a href="#about" class="footer__nav-link">
-                            <span data-lang="ar">من أنا</span>
-                            <span data-lang="en" style="display: none;">About</span>
-                        </a>
-                        <a href="#projects" class="footer__nav-link">
-                            <span data-lang="ar">أعمالي</span>
-                            <span data-lang="en" style="display: none;">Work</span>
-                        </a>
-                        <a href="#services" class="footer__nav-link">
-                            <span data-lang="ar">الخدمات</span>
-                            <span data-lang="en" style="display: none;">Services</span>
-                        </a>
-                        <a href="#contact" class="footer__nav-link">
-                            <span data-lang="ar">تواصل</span>
-                            <span data-lang="en" style="display: none;">Connect</span>
-                        </a>
+                        <a href="#about" class="footer__nav-link">About</a>
+                        <a href="#projects" class="footer__nav-link">Work</a>
+                        <a href="#services" class="footer__nav-link">Services</a>
+                        <a href="#contact" class="footer__nav-link">Connect</a>
                     </nav>
                 </div>
                 
                 <div class="footer__newsletter">
-                    <h4 class="footer__newsletter-title" data-lang="ar">ابقَ ملهمًا</h4>
-                    <h4 class="footer__newsletter-title" data-lang="en" style="display: none;">Stay inspired</h4>
-                    
-                    <p class="footer__newsletter-text" data-lang="ar">
-                        أفكار ملهمة حول التصميم والإبداع بين الحين والآخر
-                    </p>
-                    <p class="footer__newsletter-text" data-lang="en" style="display: none;">
-                        Occasional insights on design and creativity
-                    </p>
-                    
+                    <h4 class="footer__newsletter-title">Stay inspired</h4>
+                    <p class="footer__newsletter-text">Occasional insights on design and creativity</p>
                     <a href="mailto:hello@aseel.design?subject=Subscribe%20to%20newsletter" class="footer__newsletter-link">
-                        <span data-lang="ar">اشترك عبر البريد</span>
-                        <span data-lang="en" style="display: none;">Subscribe via email</span>
+                        <span>Subscribe via email</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -649,15 +485,12 @@
             <div class="footer__bottom">
                 <div class="footer__copyright">
                     <p>© <span id="currentYear"></span> Aseel. All rights reserved.</p>
-                    <p class="footer__copyright-note" data-lang="ar">مصمم بقصد</p>
-                    <p class="footer__copyright-note" data-lang="en" style="display: none;">Crafted with intention</p>
+                    <p class="footer__copyright-note">Crafted with intention</p>
                 </div>
                 
                 <div class="footer__legal">
-                    <a href="#" class="footer__legal-link" data-lang="ar">الخصوصية</a>
-                    <a href="#" class="footer__legal-link" data-lang="en" style="display: none;">Privacy</a>
-                    <a href="#" class="footer__legal-link" data-lang="ar">الشروط</a>
-                    <a href="#" class="footer__legal-link" data-lang="en" style="display: none;">Terms</a>
+                    <a href="#" class="footer__legal-link">Privacy</a>
+                    <a href="#" class="footer__legal-link">Terms</a>
                 </div>
             </div>
         </div>
@@ -674,10 +507,8 @@
             </button>
             
             <div class="modal__header">
-                <span class="modal__category" id="modalCategory" data-lang="ar">هوية بصرية</span>
-                <span class="modal__category" id="modalCategoryEn" style="display: none;">Brand Identity</span>
-                <h2 class="modal__title" id="modalTitle" data-lang="ar">دار أزياء فاخرة</h2>
-                <h2 class="modal__title" id="modalTitleEn" style="display: none;">Luxury Fashion House</h2>
+                <span class="modal__category" id="modalCategory">Brand Identity</span>
+                <h2 class="modal__title" id="modalTitle">Luxury Fashion House</h2>
                 <span class="modal__year" id="modalYear">2024</span>
             </div>
             
@@ -686,46 +517,29 @@
                 
                 <div class="modal__info">
                     <div class="modal__section">
-                        <h3 data-lang="ar">نظرة عامة على المشروع</h3>
-                        <h3 data-lang="en" style="display: none;">Project Overview</h3>
-                        <p id="modalDescription" data-lang="ar">
-                            هوية بصرية متكاملة لدار أزياء تهدف إلى الجمع بين التراث والحداثة.
-                        </p>
-                        <p id="modalDescriptionEn" style="display: none;">
-                            Complete visual identity for a high-end fashion brand blending heritage with modernity.
-                        </p>
+                        <h3>Project Overview</h3>
+                        <p id="modalDescription">Complete visual identity for a high-end fashion brand blending heritage with modernity.</p>
                     </div>
                     
                     <div class="modal__section">
-                        <h3 data-lang="ar">الخدمات المقدمة</h3>
-                        <h3 data-lang="en" style="display: none;">Services Provided</h3>
+                        <h3>Services Provided</h3>
                         <div class="modal__tags" id="modalTags">
-                            <span class="tag" data-lang="ar">تصميم الشعار</span>
-                            <span class="tag" data-lang="en" style="display: none;">Logo Design</span>
+                            <span class="tag">Logo Design</span>
+                            <span class="tag">Visual Identity</span>
                         </div>
                     </div>
                     
                     <div class="modal__section">
-                        <h3 data-lang="ar">التحدي والحل</h3>
-                        <h3 data-lang="en" style="display: none;">Challenge & Solution</h3>
-                        <p data-lang="ar">
-                            احتاج العميل إلى هوية بصرية تعكس تراثه مع جذب جمهور حديث. تضمن الحل إنشاء نظام شعار خالد مع تطبيقات معاصرة.
-                        </p>
-                        <p data-lang="en" style="display: none;">
-                            The client needed a brand identity that reflected their heritage while appealing to a modern audience. The solution involved creating a timeless logo system with contemporary applications.
-                        </p>
+                        <h3>Challenge & Solution</h3>
+                        <p>The client needed a brand identity that reflected their heritage while appealing to a modern audience. The solution involved creating a timeless logo system with contemporary applications.</p>
                     </div>
                     
                     <div class="modal__section">
-                        <h3 data-lang="ar">النتائج</h3>
-                        <h3 data-lang="en" style="display: none;">Results</h3>
+                        <h3>Results</h3>
                         <ul class="modal__results">
-                            <li data-lang="ar">زيادة في التعرف على العلامة بنسبة 40%</li>
-                            <li data-lang="en" style="display: none;">Increased brand recognition by 40%</li>
-                            <li data-lang="ar">إطلاق ناجح في 15 دولة</li>
-                            <li data-lang="en" style="display: none;">Successful launch across 15 countries</li>
-                            <li data-lang="ar">ظهور في مجلة Design Week</li>
-                            <li data-lang="en" style="display: none;">Featured in Design Week magazine</li>
+                            <li>Increased brand recognition by 40%</li>
+                            <li>Successful launch across 15 countries</li>
+                            <li>Featured in Design Week magazine</li>
                         </ul>
                     </div>
                 </div>
@@ -733,8 +547,7 @@
             
             <div class="modal__footer">
                 <a href="#contact" class="btn btn--primary">
-                    <span data-lang="ar">ابدأ مشروعاً مماثلاً</span>
-                    <span data-lang="en" style="display: none;">Start a Similar Project</span>
+                    <span>Start a Similar Project</span>
                     <i class="fas fa-star"></i>
                 </a>
             </div>
