@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all modules
     initNavigation();
     initThemeSwitcher();
+    initLanguageSwitcher();
     initAnimations();
-    initContactForm();
     initCurrentYear();
     initScrollEffects();
     initHoverEffects();
+    initProjectModal();
 });
 
 // ===========================================
@@ -28,8 +29,6 @@ function initNavigation() {
         navToggle.addEventListener('click', function() {
             this.classList.toggle('active');
             navMenu.classList.toggle('active');
-            
-            // Toggle body scroll
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         });
     }
@@ -81,6 +80,9 @@ function initNavigation() {
             }
         });
     }
+    
+    // Initial update
+    updateActiveNavLink();
 }
 
 // ===========================================
@@ -89,10 +91,10 @@ function initNavigation() {
 
 function initThemeSwitcher() {
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
+    const themeIcon = themeToggle.querySelector('.theme-toggle__icon');
     
     // Get saved theme or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('aseel-theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
     
@@ -101,8 +103,9 @@ function initThemeSwitcher() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
+        // Update theme
         document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('aseel-theme', newTheme);
         updateThemeIcon(newTheme);
         
         // Add animation
@@ -124,6 +127,84 @@ function initThemeSwitcher() {
 }
 
 // ===========================================
+// Language Switcher
+// ===========================================
+
+function initLanguageSwitcher() {
+    const languageToggle = document.getElementById('languageToggle');
+    
+    // Get saved language or default to Arabic
+    const savedLanguage = localStorage.getItem('aseel-language') || 'ar';
+    setLanguage(savedLanguage);
+    
+    // Toggle language
+    languageToggle.addEventListener('click', function() {
+        const currentLanguage = document.documentElement.getAttribute('lang');
+        const newLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+        
+        setLanguage(newLanguage);
+        localStorage.setItem('aseel-language', newLanguage);
+        
+        // Add animation
+        this.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 200);
+    });
+    
+    function setLanguage(lang) {
+        // Update HTML lang and dir attributes
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        
+        // Show/hide language-specific elements
+        const arElements = document.querySelectorAll('[data-lang="ar"]');
+        const enElements = document.querySelectorAll('[data-lang="en"]');
+        
+        if (lang === 'ar') {
+            arElements.forEach(el => el.style.display = '');
+            enElements.forEach(el => el.style.display = 'none');
+            
+            // Update toggle button text
+            document.querySelectorAll('.language-toggle__text[data-lang="ar"]').forEach(el => {
+                el.textContent = 'EN';
+            });
+            document.querySelectorAll('.language-toggle__text[data-lang="en"]').forEach(el => {
+                el.textContent = 'AR';
+            });
+        } else {
+            arElements.forEach(el => el.style.display = 'none');
+            enElements.forEach(el => el.style.display = '');
+            
+            // Update toggle button text
+            document.querySelectorAll('.language-toggle__text[data-lang="ar"]').forEach(el => {
+                el.textContent = 'AR';
+            });
+            document.querySelectorAll('.language-toggle__text[data-lang="en"]').forEach(el => {
+                el.textContent = 'EN';
+            });
+        }
+        
+        // Update navigation menu position based on direction
+        const navMenu = document.getElementById('navMenu');
+        if (navMenu.classList.contains('active')) {
+            if (lang === 'ar') {
+                navMenu.style.right = '-100%';
+                navMenu.style.left = 'auto';
+            } else {
+                navMenu.style.left = '-100%';
+                navMenu.style.right = 'auto';
+            }
+        }
+        
+        // Refresh animations
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
+    }
+}
+
+// ===========================================
 // Animations
 // ===========================================
 
@@ -140,13 +221,19 @@ function initAnimations() {
     const heroTimeline = gsap.timeline();
     
     heroTimeline
-        .from('.hero__title-line', {
+        .from('.hero__label', {
+            y: 20,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        })
+        .from('.hero__title-line--1', {
             y: 60,
             opacity: 0,
             duration: 1.2,
             ease: 'power3.out'
-        })
-        .from('.hero__title-sub', {
+        }, '-=0.8')
+        .from('.hero__title-line--2', {
             y: 60,
             opacity: 0,
             duration: 1.2,
@@ -158,7 +245,7 @@ function initAnimations() {
             duration: 1,
             ease: 'power3.out'
         }, '-=0.6')
-        .from('.hero__btns', {
+        .from('.hero__actions', {
             y: 40,
             opacity: 0,
             duration: 1,
@@ -174,132 +261,100 @@ function initAnimations() {
         ease: 'power2.inOut'
     });
     
-    // Fade up animations for sections
-    gsap.utils.toArray('.fade-up').forEach(element => {
-        gsap.from(element, {
-            scrollTrigger: {
-                trigger: element,
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            },
-            y: 40,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power3.out'
-        });
+    // Floating ornaments
+    gsap.to('.hero__ornament--1', {
+        y: 20,
+        rotation: 5,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
     });
     
-    // Section titles animation
-    gsap.utils.toArray('.section__title').forEach(title => {
-        gsap.from(title, {
-            scrollTrigger: {
-                trigger: title,
-                start: 'top 85%'
-            },
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        });
+    gsap.to('.hero__ornament--2', {
+        y: -20,
+        rotation: -5,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 0.5
+    });
+    
+    // Fade up animations for sections
+    gsap.utils.toArray('.section').forEach(section => {
+        const title = section.querySelector('.section__title');
+        const subtitle = section.querySelector('.section__subtitle');
+        
+        if (title) {
+            gsap.from(title, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%'
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        }
+        
+        if (subtitle) {
+            gsap.from(subtitle, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%'
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                delay: 0.2,
+                ease: 'power3.out'
+            });
+        }
     });
     
     // Project cards animation
-    gsap.utils.toArray('.project-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 80%'
-            },
-            y: 60,
-            opacity: 0,
-            duration: 0.8,
-            delay: i * 0.1,
-            ease: 'power3.out'
-        });
+    const projectCards = document.querySelectorAll('.project-card');
+    gsap.from(projectCards, {
+        scrollTrigger: {
+            trigger: '.projects__grid',
+            start: 'top 80%'
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out'
+    });
+    
+    // Service cards animation
+    const serviceCards = document.querySelectorAll('.service-card');
+    gsap.from(serviceCards, {
+        scrollTrigger: {
+            trigger: '.services__grid',
+            start: 'top 80%'
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out'
     });
     
     // Gallery items animation
-    gsap.utils.toArray('.gallery-item').forEach((item, i) => {
-        gsap.from(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: 'top 80%'
-            },
-            scale: 0.8,
-            opacity: 0,
-            duration: 0.6,
-            delay: i * 0.05,
-            ease: 'back.out(1.7)'
-        });
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    gsap.from(galleryItems, {
+        scrollTrigger: {
+            trigger: '.gallery__grid',
+            start: 'top 80%'
+        },
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.08,
+        ease: 'back.out(1.7)'
     });
-}
-
-// ===========================================
-// Contact Form
-// ===========================================
-
-function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
-    
-    if (!contactForm) return;
-    
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        // Validate form
-        if (validateForm(data)) {
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'جاري الإرسال...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call (replace with actual fetch)
-            setTimeout(() => {
-                // Reset form
-                this.reset();
-                
-                // Reset button
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                
-                // Show success message
-                formSuccess.textContent = 'شكرًا لك! سنرد على رسالتك قريبًا.';
-                formSuccess.style.display = 'block';
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    formSuccess.style.display = 'none';
-                }, 5000);
-            }, 2000);
-        }
-    });
-    
-    function validateForm(data) {
-        // Simple validation
-        if (!data.name || data.name.length < 2) {
-            alert('الرجاء إدخال اسم صحيح');
-            return false;
-        }
-        
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!data.email || !emailRegex.test(data.email)) {
-            alert('الرجاء إدخال بريد إلكتروني صحيح');
-            return false;
-        }
-        
-        if (!data.message || data.message.length < 10) {
-            alert('الرجاء إدخال رسالة ذات معنى');
-            return false;
-        }
-        
-        return true;
-    }
 }
 
 // ===========================================
@@ -321,16 +376,31 @@ function initScrollEffects() {
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
+            const href = this.getAttribute('href');
             
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (href === '#') return;
             
-            const targetElement = document.querySelector(targetId);
+            const targetElement = document.querySelector(href);
             if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+                e.preventDefault();
+                
+                // Animate scroll
+                gsap.to(window, {
+                    duration: 1,
+                    scrollTo: {
+                        y: targetElement,
+                        offsetY: 80
+                    },
+                    ease: 'power3.inOut'
+                });
+                
+                // Add click animation
+                gsap.to(this, {
+                    scale: 0.9,
+                    duration: 0.1,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: 'power2.inOut'
                 });
             }
         });
@@ -345,9 +415,10 @@ function initScrollEffects() {
         left: 0;
         width: 0%;
         height: 2px;
-        background: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary));
-        z-index: 1000;
+        background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
+        z-index: var(--z-tooltip);
         transition: width 0.1s ease;
+        pointer-events: none;
     `;
     document.body.appendChild(progressBar);
     
@@ -367,17 +438,46 @@ function initHoverEffects() {
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach(card => {
-        const link = card.querySelector('.project-card__link');
-        
         card.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                y: -8,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+            
+            const link = this.querySelector('.project-card__link');
             if (link) {
-                link.style.gap = '15px';
+                const currentLang = document.documentElement.getAttribute('lang');
+                if (currentLang === 'ar') {
+                    gsap.to(link.querySelector('i'), {
+                        x: -5,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                } else {
+                    gsap.to(link.querySelector('i'), {
+                        x: 5,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                }
             }
         });
         
         card.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
+            
+            const link = this.querySelector('.project-card__link');
             if (link) {
-                link.style.gap = '8px';
+                gsap.to(link.querySelector('i'), {
+                    x: 0,
+                    duration: 0.3,
+                    ease: 'power2.in'
+                });
             }
         });
     });
@@ -387,19 +487,44 @@ function initHoverEffects() {
     
     galleryItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
-            const overlay = this.querySelector('.gallery-item__overlay');
-            if (overlay) {
-                overlay.style.opacity = '1';
-                overlay.querySelector('span').style.transform = 'translateY(0)';
-            }
+            gsap.to(this.querySelector('.gallery-item__image'), {
+                scale: 1.1,
+                duration: 0.6,
+                ease: 'power2.out'
+            });
+            
+            gsap.to(this.querySelector('.gallery-item__overlay'), {
+                opacity: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+            
+            gsap.to(this.querySelector('.gallery-item__title'), {
+                y: 0,
+                duration: 0.4,
+                delay: 0.1,
+                ease: 'power2.out'
+            });
         });
         
         item.addEventListener('mouseleave', function() {
-            const overlay = this.querySelector('.gallery-item__overlay');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                overlay.querySelector('span').style.transform = 'translateY(20px)';
-            }
+            gsap.to(this.querySelector('.gallery-item__image'), {
+                scale: 1,
+                duration: 0.6,
+                ease: 'power2.in'
+            });
+            
+            gsap.to(this.querySelector('.gallery-item__overlay'), {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
+            
+            gsap.to(this.querySelector('.gallery-item__title'), {
+                y: 20,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
         });
     });
     
@@ -407,20 +532,204 @@ function initHoverEffects() {
     const serviceCards = document.querySelectorAll('.service-card');
     
     serviceCards.forEach(card => {
-        const icon = card.querySelector('.service-card__icon');
-        
         card.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                y: -4,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+            
+            const icon = this.querySelector('.service-card__icon');
             if (icon) {
-                icon.style.transform = 'rotate(10deg) scale(1.1)';
+                gsap.to(icon, {
+                    rotation: 10,
+                    duration: 0.5,
+                    ease: 'back.out(1.7)'
+                });
             }
         });
         
         card.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
+            
+            const icon = this.querySelector('.service-card__icon');
             if (icon) {
-                icon.style.transform = 'rotate(0deg) scale(1)';
+                gsap.to(icon, {
+                    rotation: 0,
+                    duration: 0.5,
+                    ease: 'back.out(1.7)'
+                });
             }
         });
     });
+    
+    // Social links hover effect
+    const socialLinks = document.querySelectorAll('.social-link');
+    
+    socialLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                y: -5,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
+        });
+    });
+}
+
+// ===========================================
+// Project Modal
+// ===========================================
+
+function initProjectModal() {
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.getElementById('modalClose');
+    const projectViewBtns = document.querySelectorAll('.project-view-btn');
+    
+    // Project data
+    const projects = {
+        1: {
+            category: { ar: 'هوية بصرية', en: 'Brand Identity' },
+            title: { ar: 'دار أزياء فاخرة', en: 'Luxury Fashion House' },
+            year: '2024',
+            description: {
+                ar: 'هوية بصرية متكاملة لدار أزياء تهدف إلى الجمع بين التراث والحداثة. تضمن المشروع إنشاء نظام علامة تجارية شامل يعمل عبر نقاط اللمس الرقمية والمادية.',
+                en: 'Complete visual identity for a high-end fashion brand blending heritage with modernity. The project involved creating a comprehensive brand system that works across digital and physical touchpoints.'
+            },
+            tags: {
+                ar: ['تصميم الشعار', 'الهوية البصرية', 'الطباعة', 'دليل العلامة'],
+                en: ['Logo Design', 'Visual Identity', 'Typography', 'Brand Guidelines']
+            },
+            imageClass: 'project-card__image--1'
+        },
+        2: {
+            category: { ar: 'تصميم ويب', en: 'Web Design' },
+            title: { ar: 'معرض فني تفاعلي', en: 'Interactive Art Gallery' },
+            year: '2024',
+            description: {
+                ar: 'منصة رقمية لعرض الأعمال الفنية بتجربة مستخدم غامرة. يركز التصميم على إنشاء رحلة سلسة عبر المعارض الافتراضية مع الحفاظ على السلامة الفنية لكل قطعة.',
+                en: 'Digital platform for art exhibition with immersive user experience. The design focuses on creating a seamless journey through virtual exhibitions while maintaining the artistic integrity of each piece.'
+            },
+            tags: {
+                ar: ['تصميم UI/UX', 'التفاعل', 'الفن الرقمي', 'تطوير الويب'],
+                en: ['UI/UX Design', 'Interaction', 'Digital Art', 'Web Development']
+            },
+            imageClass: 'project-card__image--2'
+        },
+        3: {
+            category: { ar: 'إعلان', en: 'Advertising' },
+            title: { ar: 'حملة مشروب فاخر', en: 'Premium Beverage Campaign' },
+            year: '2023',
+            description: {
+                ar: 'حملة إعلانية شاملة مع تصوير احترافي وهوية بصرية متماسكة. نجحت الحملة في ترسيخ العلامة التجارية كخيار نمط حياة فاخر من خلال سرد القصص البصرية الاستراتيجية.',
+                en: 'Comprehensive advertising campaign with professional photography. The campaign successfully positioned the brand as a premium lifestyle choice through strategic visual storytelling.'
+            },
+            tags: {
+                ar: ['الإعلان', 'التصوير', 'التسويق', 'إستراتيجية الحملة'],
+                en: ['Advertising', 'Photography', 'Marketing', 'Campaign Strategy']
+            },
+            imageClass: 'project-card__image--3'
+        }
+    };
+    
+    // Open modal when clicking project view button
+    projectViewBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const projectId = this.getAttribute('data-project');
+            openProjectModal(projectId);
+        });
+    });
+    
+    // Close modal
+    modalClose.addEventListener('click', closeModal);
+    modal.querySelector('.modal__overlay').addEventListener('click', closeModal);
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    
+    function openProjectModal(projectId) {
+        const project = projects[projectId];
+        const currentLang = document.documentElement.getAttribute('lang');
+        
+        if (!project) return;
+        
+        // Update modal content based on current language
+        document.getElementById('modalCategory').textContent = project.category[currentLang];
+        document.getElementById('modalTitle').textContent = project.title[currentLang];
+        document.getElementById('modalYear').textContent = project.year;
+        
+        // Update description
+        if (currentLang === 'ar') {
+            document.getElementById('modalDescription').textContent = project.description.ar;
+            document.getElementById('modalDescription').style.display = '';
+            document.getElementById('modalDescriptionEn').style.display = 'none';
+        } else {
+            document.getElementById('modalDescriptionEn').textContent = project.description.en;
+            document.getElementById('modalDescriptionEn').style.display = '';
+            document.getElementById('modalDescription').style.display = 'none';
+        }
+        
+        // Update tags
+        const tagsContainer = document.getElementById('modalTags');
+        tagsContainer.innerHTML = '';
+        const tags = project.tags[currentLang];
+        tags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'tag';
+            tagElement.textContent = tag;
+            if (currentLang === 'ar') {
+                tagElement.setAttribute('data-lang', 'ar');
+            } else {
+                tagElement.setAttribute('data-lang', 'en');
+            }
+            tagsContainer.appendChild(tagElement);
+        });
+        
+        // Update image
+        const modalImage = document.getElementById('modalImage');
+        modalImage.className = 'modal__image';
+        modalImage.classList.add(project.imageClass);
+        
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Animate modal in
+        gsap.fromTo(modal.querySelector('.modal__content'),
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' }
+        );
+    }
+    
+    function closeModal() {
+        // Animate modal out
+        gsap.to(modal.querySelector('.modal__content'), {
+            opacity: 0,
+            y: 20,
+            duration: 0.2,
+            ease: 'power3.in',
+            onComplete: () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 }
 
 // ===========================================
@@ -468,3 +777,44 @@ document.addEventListener('visibilitychange', function() {
         ScrollTrigger.refresh();
     }
 });
+
+// Handle scroll animations for fade-up elements
+function initScrollAnimations() {
+    const fadeUpElements = document.querySelectorAll('.fade-up');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    fadeUpElements.forEach(el => observer.observe(el));
+}
+
+// Initialize scroll animations
+initScrollAnimations();
+
+// Handle language change in modal
+document.documentElement.addEventListener('langchange', function() {
+    // This event is triggered when language changes
+    const modal = document.getElementById('projectModal');
+    if (modal.classList.contains('active')) {
+        // Close and reopen modal to update language
+        const activeProject = document.querySelector('.project-view-btn:hover')?.getAttribute('data-project') || '1';
+        closeModal();
+        setTimeout(() => openProjectModal(activeProject), 300);
+    }
+});
+
+// Custom event for language change
+const originalSetLanguage = window.setLanguage;
+window.setLanguage = function(lang) {
+    const event = new CustomEvent('langchange', { detail: { language: lang } });
+    document.documentElement.dispatchEvent(event);
+    return originalSetLanguage ? originalSetLanguage(lang) : null;
+};
